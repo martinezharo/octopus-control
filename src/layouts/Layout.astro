@@ -1,0 +1,104 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "product";
+}
+
+const {
+  title,
+  description = "Tu tienda de confianza de mandos a distancia verificados. Mandos de calidad al mejor precio en Octopus Control.",
+  image = "/placeholder-og.jpg",
+  type = "website",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle =
+  title === "Inicio"
+    ? "Octopus Control | Mandos a distancia para TV y Streaming"
+    : `${title} | Octopus Control`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDMB8XSQFF"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-NDMB8XSQFF");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta
+      property="og:type"
+      content={type === "product" ? "product" : "website"}
+    />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Octopus Control" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/octopus-control-icon.webp" />
+    <link rel="apple-touch-icon" href="/octopus-control-icon.webp" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#033746" />
+    <meta name="msapplication-TileColor" content="#033746" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fhuujhrlmdfnpnnucxfv.supabase.co" />
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  /* Ensure main content takes full height */
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  #main-content {
+    flex: 1;
+  }
+</style>

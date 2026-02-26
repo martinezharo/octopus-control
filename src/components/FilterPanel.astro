@@ -1,0 +1,928 @@
+---
+interface Props {
+  categorias: string[];
+}
+
+const { categorias } = Astro.props;
+---
+
+<div class="filter-panel glass-card" id="filter-panel">
+  <!-- Header con título y controles -->
+  <div class="filter-header is-collapsed" id="filter-header">
+    <div class="header-left">
+      <h3 class="filter-title">
+        <div class="filter-title-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+          </svg>
+        </div>
+        Filtros
+      </h3>
+    </div>
+    
+    <div class="header-actions">
+      <button class="reset-btn" id="reset-filters">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+        <span>Restablecer</span>
+      </button>
+      
+      <button class="toggle-btn" id="toggle-filters" aria-label="Expandir filtros">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Contenido colapsable -->
+  <div class="filter-content collapsed" id="filter-content">
+    <div class="filter-content-inner">
+      <!-- Categorías con scroll horizontal -->
+      <div class="filter-section category-section">
+        <div class="section-header">
+          <h4 class="filter-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h4v4H4zM14 4h4v4h-4zM4 14h4v4H4zM14 14h4v4h-4z"/>
+            </svg>
+            Categoría
+          </h4>
+          <div class="scroll-indicator" id="scroll-indicator">
+            <span class="scroll-hint">Desliza</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+        <div class="category-scroll-container">
+          <button class="scroll-nav scroll-nav-left" id="scroll-left" aria-label="Scroll left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <div class="category-fade category-fade-left" id="fade-left"></div>
+          <div class="category-pills" id="category-pills">
+            <button class="pill active" data-category="all">
+              <span>Todos</span>
+              <span class="pill-count" data-count="all"></span>
+            </button>
+            {categorias.map((cat) => (
+              <button class="pill" data-category={cat}>
+                <span>{cat}</span>
+                <span class="pill-count" data-count={cat}></span>
+              </button>
+            ))}
+          </div>
+          <div class="category-fade category-fade-right" id="fade-right"></div>
+          <button class="scroll-nav scroll-nav-right" id="scroll-right" aria-label="Scroll right">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Ordenar por -->
+      <div class="filter-section sort-section">
+        <h4 class="filter-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M6 12h12M9 18h6"/>
+          </svg>
+          Ordenar por
+        </h4>
+        <div class="sort-options" id="sort-options">
+          <button class="sort-btn active" data-sort="default">
+            <div class="sort-btn-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+              </svg>
+            </div>
+            <span>Destacados</span>
+          </button>
+          <button class="sort-btn" data-sort="price-asc">
+            <div class="sort-btn-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20V4M5 11l7-7 7 7"/>
+              </svg>
+            </div>
+            <span>Menor precio</span>
+          </button>
+          <button class="sort-btn" data-sort="price-desc">
+            <div class="sort-btn-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 4v16M5 13l7 7 7-7"/>
+              </svg>
+            </div>
+            <span>Mayor precio</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .filter-panel {
+    padding: 0;
+    margin-bottom: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(182,219,225,0.1) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(3, 55, 70, 0.08);
+    box-shadow: 
+      0 4px 24px rgba(3, 55, 70, 0.06),
+      0 1px 2px rgba(3, 55, 70, 0.04);
+  }
+  
+  /* Header */
+  .filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid rgba(3, 55, 70, 0.06);
+    background: linear-gradient(135deg, rgba(3, 55, 70, 0.02) 0%, transparent 100%);
+    transition: all 0.3s ease;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  
+  .filter-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0;
+  }
+  
+  .filter-title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(3, 55, 70, 0.2);
+  }
+  
+  .filter-title-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Reset Button */
+  .reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--color-gray-500);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-gray-200);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .reset-btn:hover {
+    background: var(--color-gray-100);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+  
+  .reset-btn:active {
+    transform: translateY(0);
+  }
+  
+  .reset-btn svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .reset-btn:hover svg {
+    transform: rotate(-180deg);
+  }
+  
+  /* Toggle Button */
+  .toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    color: var(--color-gray-500);
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .toggle-btn:hover {
+    background: var(--color-gray-100);
+    color: var(--color-primary);
+  }
+  
+  .toggle-btn svg {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Filter Content Animation */
+  .filter-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    overflow: hidden;
+    opacity: 1;
+  }
+  
+  .filter-content-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+  
+  .filter-content.collapsed {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Collapsed State Styles */
+  .filter-header.is-collapsed {
+    border-bottom-color: transparent;
+  }
+  
+  .filter-header.is-collapsed .toggle-btn svg {
+    transform: rotate(180deg);
+  }
+  
+  /* Filter Sections */
+  .filter-section {
+    padding: var(--space-md) var(--space-lg);
+  }
+  
+  .category-section {
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(3, 55, 70, 0.06);
+  }
+  
+  .sort-section {
+    padding-top: var(--space-md);
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .filter-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  
+  .filter-label svg {
+    opacity: 0.7;
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.6875rem;
+    color: var(--color-gray-400);
+    font-weight: 500;
+    animation: pulse-hint 2s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scroll-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .scroll-hint {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @keyframes pulse-hint {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  
+  /* Category Scroll Container */
+  .category-scroll-container {
+    position: relative;
+    margin: 0 calc(var(--space-lg) * -1);
+    padding: 0 var(--space-lg);
+  }
+  
+  .category-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .category-fade-left {
+    left: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.98) 0%, transparent 100%);
+  }
+  
+  .category-fade-right {
+    right: 0;
+    background: linear-gradient(-90deg, rgba(255,255,255,0.98) 0%, transparent 100%);
+  }
+  
+  .category-fade.visible {
+    opacity: 1;
+  }
+  
+  /* Navigation Arrows */
+  .scroll-nav {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: white;
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-full);
+    color: var(--color-gray-600);
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .scroll-nav.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .scroll-nav:hover {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(3, 55, 70, 0.25);
+    transform: translateY(-50%) scale(1.05);
+  }
+  
+  .scroll-nav:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+  
+  .scroll-nav-left {
+    left: 4px;
+  }
+  
+  .scroll-nav-right {
+    right: 4px;
+  }
+  
+  @media (min-width: 768px) {
+    .scroll-nav {
+      display: flex;
+    }
+    
+    .category-scroll-container {
+      padding-left: 44px;
+      padding-right: 44px;
+    }
+  }
+  
+  /* Category Pills - Horizontal Scroll */
+  .category-pills {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 8px 4px;
+    margin: -8px -4px;
+  }
+  
+  .category-pills::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Pills */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: white;
+    color: var(--color-gray-600);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--color-gray-200);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #045a73 100%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    border-radius: inherit;
+    z-index: 0;
+  }
+  
+  .pill > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+
+  
+  .pill-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: var(--color-gray-100);
+    color: var(--color-gray-500);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    transition: all 0.25s ease;
+  }
+  
+  .pill-count:empty {
+    display: none;
+  }
+  
+  .pill:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(3, 55, 70, 0.12);
+  }
+  
+
+  
+  .pill:active {
+    transform: translateY(0);
+  }
+  
+  .pill.active {
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 
+      0 4px 16px rgba(3, 55, 70, 0.25),
+      0 0 0 3px rgba(3, 55, 70, 0.1);
+  }
+  
+  .pill.active::before {
+    opacity: 1;
+  }
+  
+  .pill.active .pill-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+  }
+  
+
+  
+  /* Sort Options */
+  .sort-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: white;
+    color: var(--color-gray-600);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--color-gray-200);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  
+  .sort-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-gray-100);
+    border-radius: var(--radius-md);
+    transition: all 0.25s ease;
+  }
+  
+  .sort-btn-icon svg {
+    transition: transform 0.25s ease;
+  }
+  
+  .sort-btn:hover {
+    border-color: var(--color-secondary);
+    background: var(--color-secondary-light);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(3, 55, 70, 0.08);
+  }
+  
+  .sort-btn:hover .sort-btn-icon {
+    background: var(--color-secondary);
+  }
+  
+  .sort-btn:active {
+    transform: translateY(0);
+  }
+  
+  .sort-btn.active {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(3, 55, 70, 0.12);
+  }
+  
+  .sort-btn.active .sort-btn-icon {
+    background: var(--color-primary);
+    color: white;
+  }
+  
+  .sort-btn.active .sort-btn-icon svg {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive */
+  @media (max-width: 767px) {
+    .filter-header {
+      padding: var(--space-sm) var(--space-md);
+    }
+    
+    .filter-section {
+      padding: var(--space-sm) var(--space-md);
+    }
+    
+    .category-scroll-container {
+      margin: 0 calc(var(--space-md) * -1);
+      padding: 0 var(--space-md);
+    }
+    
+    .reset-btn span {
+      display: none;
+    }
+    
+    .reset-btn {
+      padding: 8px;
+      border-radius: var(--radius-md);
+    }
+    
+    .pill {
+      padding: 8px 14px;
+      font-size: 0.8125rem;
+    }
+    
+    .pill-icon {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .sort-options {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 4px;
+      margin-right: calc(var(--space-md) * -1);
+      padding-right: var(--space-md);
+    }
+    
+    .sort-btn {
+      flex-shrink: 0;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .filter-panel {
+      flex-direction: column;
+    }
+    
+    .filter-header {
+      padding: var(--space-md) var(--space-xl);
+    }
+    
+    .filter-section {
+      padding: var(--space-md) var(--space-xl);
+    }
+    
+    .category-scroll-container {
+      margin: 0 calc(var(--space-xl) * -1);
+      padding: 0 var(--space-xl);
+    }
+    
+    .category-fade {
+      width: 80px;
+    }
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let categoryPills = document.querySelectorAll('#category-pills .pill');
+    const sortButtons = document.querySelectorAll('#sort-options .sort-btn');
+    const resetBtn = document.getElementById('reset-filters');
+    const toggleBtn = document.getElementById('toggle-filters');
+    const filterHeader = document.getElementById('filter-header');
+    const filterContent = document.getElementById('filter-content');
+    const productGrid = document.getElementById('product-grid');
+    const categoryPillsContainer = document.getElementById('category-pills');
+    const fadeLeft = document.getElementById('fade-left');
+    const fadeRight = document.getElementById('fade-right');
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+    
+    if (!productGrid) return;
+    
+    let currentCategory = 'all';
+    let currentSort = 'default';
+    
+    // Toggle logic
+    toggleBtn?.addEventListener('click', () => {
+      const isCollapsed = filterContent?.classList.contains('collapsed');
+      
+      if (isCollapsed) {
+        filterContent?.classList.remove('collapsed');
+        filterHeader?.classList.remove('is-collapsed');
+        toggleBtn.setAttribute('aria-label', 'Contraer filtros');
+        
+        // Refresh scroll indicators after animation
+        setTimeout(updateScrollIndicators, 400);
+      } else {
+        filterContent?.classList.add('collapsed');
+        filterHeader?.classList.add('is-collapsed');
+        toggleBtn.setAttribute('aria-label', 'Expandir filtros');
+      }
+    });
+
+    // Also toggle when clicking header title/icon area
+    filterHeader?.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('.header-actions')) return;
+      toggleBtn?.click();
+    });
+    
+    // Get all product cards
+    const getAllProducts = () => {
+      return Array.from(productGrid.querySelectorAll('.product-card-wrapper'));
+    };
+    
+    // Update category counts and reorder pills by count
+    const updateCategoryCounts = () => {
+      const products = getAllProducts();
+      const counts = { all: products.length };
+      
+      products.forEach(product => {
+        const category = product.dataset.category || '';
+        if (category) {
+          counts[category] = (counts[category] || 0) + 1;
+        }
+      });
+      
+      // Update count badges
+      document.querySelectorAll('.pill-count').forEach(badge => {
+        const category = badge.dataset.count;
+        const count = counts[category] || 0;
+        badge.textContent = count > 0 ? count.toString() : '';
+      });
+      
+      // Sort pills by count (except "Todos" which stays first)
+      if (categoryPillsContainer) {
+        const pills = Array.from(categoryPillsContainer.querySelectorAll('.pill'));
+        const todosPill = pills.find(p => p.dataset.category === 'all');
+        const otherPills = pills.filter(p => p.dataset.category !== 'all');
+        
+        // Sort by count descending
+        otherPills.sort((a, b) => {
+          const countA = counts[a.dataset.category] || 0;
+          const countB = counts[b.dataset.category] || 0;
+          return countB - countA;
+        });
+        
+        // Reorder in DOM
+        if (todosPill) {
+          categoryPillsContainer.appendChild(todosPill);
+        }
+        otherPills.forEach(pill => {
+          categoryPillsContainer.appendChild(pill);
+        });
+        
+        // Refresh pill references
+        categoryPills = document.querySelectorAll('#category-pills .pill');
+        
+        // Re-attach click handlers
+        categoryPills.forEach(pill => {
+          pill.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent header toggle
+            categoryPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            currentCategory = pill.dataset.category || 'all';
+            pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            updateProducts();
+          });
+        });
+      }
+    };
+    
+    // Update scroll fade indicators and nav buttons
+    const updateScrollIndicators = () => {
+      if (!categoryPillsContainer) return;
+      
+      const { scrollLeft, scrollWidth, clientWidth } = categoryPillsContainer;
+      const maxScroll = scrollWidth - clientWidth;
+      const hasOverflow = scrollWidth > clientWidth + 5;
+      
+      // Show/hide left fade and button
+      const canScrollLeft = scrollLeft > 10;
+      if (fadeLeft) fadeLeft.classList.toggle('visible', canScrollLeft);
+      if (scrollLeftBtn) scrollLeftBtn.classList.toggle('visible', hasOverflow && canScrollLeft);
+      
+      // Show/hide right fade and button
+      const canScrollRight = scrollLeft < maxScroll - 10;
+      if (fadeRight) fadeRight.classList.toggle('visible', canScrollRight);
+      if (scrollRightBtn) scrollRightBtn.classList.toggle('visible', hasOverflow && canScrollRight);
+      
+      // Hide scroll indicator when scrolled or no overflow
+      if (scrollIndicator) {
+        const hasScrolled = scrollLeft > 20;
+        scrollIndicator.classList.toggle('hidden', !hasOverflow || hasScrolled);
+      }
+    };
+    
+    // Scroll navigation handlers
+    const scrollAmount = 200;
+    
+    scrollLeftBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      categoryPillsContainer?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    
+    scrollRightBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      categoryPillsContainer?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+    
+    // Add scroll listener
+    if (categoryPillsContainer) {
+      categoryPillsContainer.addEventListener('scroll', updateScrollIndicators);
+      setTimeout(updateScrollIndicators, 100);
+      window.addEventListener('resize', updateScrollIndicators);
+    }
+    
+    // Filter and sort products
+    const updateProducts = () => {
+      const products = getAllProducts();
+      
+      // Add stagger animation on filter change
+      let visibleIndex = 0;
+      
+      products.forEach(product => {
+        const category = product.dataset.category || '';
+        const matchesCategory = currentCategory === 'all' || category === currentCategory;
+        
+        if (matchesCategory) {
+          product.style.display = '';
+          product.style.animationDelay = `${visibleIndex * 0.05}s`;
+          visibleIndex++;
+        } else {
+          product.style.display = 'none';
+        }
+      });
+      
+      // Sort visible products
+      const visibleProducts = products.filter(p => p.style.display !== 'none');
+      
+      visibleProducts.sort((a, b) => {
+        const priceA = parseFloat(a.dataset.price || '0');
+        const priceB = parseFloat(b.dataset.price || '0');
+        const featuredA = a.dataset.featured === 'true' ? 1 : 0;
+        const featuredB = b.dataset.featured === 'true' ? 1 : 0;
+        
+        switch (currentSort) {
+          case 'price-asc':
+            return priceA - priceB;
+          case 'price-desc':
+            return priceB - priceA;
+          default: // Featured first (A-Z), then non-featured (Z-A)
+            if (featuredA !== featuredB) return featuredB - featuredA;
+            if (featuredA) {
+              return titleA.localeCompare(titleB, 'es');
+            } else {
+              return titleB.localeCompare(titleA, 'es');
+            }
+        }
+      });
+      
+      // Reorder in DOM
+      visibleProducts.forEach(product => {
+        productGrid.appendChild(product);
+      });
+      
+      // Update empty state
+      const emptyState = document.getElementById('empty-state');
+      if (emptyState) {
+        emptyState.style.display = visibleProducts.length === 0 ? 'block' : 'none';
+      }
+    };
+    
+    // Sort handlers
+    sortButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sortButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSort = btn.dataset.sort || 'default';
+        updateProducts();
+      });
+    });
+    
+    // Reset handler
+    resetBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      categoryPills.forEach(p => p.classList.remove('active'));
+      categoryPills[0]?.classList.add('active');
+      
+      sortButtons.forEach(b => b.classList.remove('active'));
+      sortButtons[0]?.classList.add('active');
+      
+      currentCategory = 'all';
+      currentSort = 'default';
+      
+      // Scroll back to start
+      if (categoryPillsContainer) {
+        categoryPillsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+      }
+      
+      updateProducts();
+    });
+    
+    // Initialize counts
+    updateCategoryCounts();
+  });
+</script>

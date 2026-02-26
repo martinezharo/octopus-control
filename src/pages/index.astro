@@ -1,0 +1,255 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getProductosDestacados, getProductos } from '../lib/supabase';
+
+const productosDestacados = await getProductosDestacados();
+const todosProductos = await getProductos();
+
+// Show featured products first, or first 6 products if no featured
+const productosToShow = productosDestacados.length > 0 
+  ? productosDestacados.slice(0, 6) 
+  : todosProductos.slice(0, 6);
+---
+
+<Layout title="Inicio">
+  <Hero />
+  
+  <!-- Featured Products Section -->
+  <section class="section featured-section">
+    <div class="section-bg"></div>
+    <div class="container">
+      <header class="section-header">
+        <span class="section-badge animate-fadeIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          Productos Destacados
+        </span>
+        <h2 class="section-title animate-fadeInUp">
+          <span class="highlight">Los más vendidos</span>
+        </h2>
+        <p class="section-description animate-fadeInUp delay-100">
+          Descubre nuestra selección de mandos más vendidos en Wallapop y Vinted durante los últimos meses.
+        </p>
+      </header>
+      
+      {productosToShow.length > 0 ? (
+        <div class="products-grid grid grid-3">
+          {productosToShow.map((producto, index) => (
+            <ProductCard producto={producto} index={index} />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+            <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+          </svg>
+          <h3>Próximamente</h3>
+          <p>Estamos preparando productos increíbles para ti.</p>
+        </div>
+      )}
+      
+      <div class="section-cta animate-fadeInUp delay-300">
+        <a href="/products/" class="btn btn-primary btn-lg">
+          Ver todos los productos
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="section features-section">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card animate-fadeInUp">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Productos Verificados</h3>
+          <p class="feature-description">
+            Cada producto es revisado y probado individualmente antes de publicarse.
+          </p>
+        </div>
+        
+        <div class="feature-card animate-fadeInUp delay-100">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.976-2.888a1 1 0 00-1.175 0l-3.976 2.888c-.784.57-1.838-.197-1.539-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Plataformas Seguras</h3>
+          <p class="feature-description">
+            Compra a través de Wallapop y Vinted con total seguridad y protección.
+          </p>
+        </div>
+        
+        <div class="feature-card animate-fadeInUp delay-200">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Mejor Precio</h3>
+          <p class="feature-description">
+            Productos de calidad comprobada a precios imbatibles en el mercado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Featured Section */
+  .featured-section {
+    position: relative;
+    background: var(--color-gray-50);
+    overflow: hidden;
+  }
+  
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(182, 219, 225, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(3, 55, 70, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--space-3xl);
+  }
+  
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-white);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-full);
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .section-badge svg {
+    color: #f59e0b;
+  }
+  
+  .section-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-md);
+  }
+  
+  .section-title .highlight {
+    color: var(--color-primary);
+  }
+  
+  .section-description {
+    font-size: 1.0625rem;
+    color: var(--color-gray-600);
+    line-height: 1.7;
+  }
+  
+  .products-grid {
+    margin-bottom: var(--space-3xl);
+  }
+  
+  .section-cta {
+    text-align: center;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: var(--space-4xl) var(--space-xl);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    border: 2px dashed var(--color-gray-200);
+    margin-bottom: var(--space-3xl);
+  }
+  
+  .empty-state svg {
+    color: var(--color-gray-300);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .empty-state p {
+    color: var(--color-gray-500);
+  }
+  
+  /* Features Section */
+  .features-section {
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--space-xl);
+  }
+  
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .feature-card {
+    text-align: center;
+    padding: var(--space-2xl);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-gray-100);
+    transition: all var(--transition-base);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-secondary);
+  }
+  
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+    border-radius: var(--radius-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .feature-title {
+    font-size: 1.25rem;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .feature-description {
+    font-size: 0.9375rem;
+    color: var(--color-gray-600);
+    line-height: 1.7;
+  }
+</style>

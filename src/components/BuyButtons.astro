@@ -1,0 +1,197 @@
+---
+interface Props {
+  productTitle: string;
+}
+
+const { productTitle } = Astro.props;
+
+const wallapopUrl = `https://es.wallapop.com/user/oliverm-441214038`;
+const vintedUrl = `https://www.vinted.es/member/237495534`;
+---
+
+<div class="buy-buttons">
+  <h3 class="buy-title">Compra este producto en:</h3>
+  
+  <div class="buttons-grid">
+    <a 
+      href={wallapopUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="buy-btn wallapop"
+      aria-label={`Comprar ${productTitle} en Wallapop`}
+    >
+      <span class="btn-icon">
+        <img src="/wallapop.svg" alt="" width="28" height="28" />
+      </span>
+      <span class="btn-content">
+        <span class="btn-label">Comprar en</span>
+        <span class="btn-platform">Wallapop</span>
+      </span>
+      <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+      </svg>
+    </a>
+    
+    <a 
+      href={vintedUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="buy-btn vinted"
+      aria-label={`Comprar ${productTitle} en Vinted`}
+    >
+      <span class="btn-icon">
+        <img src="/vinted.svg" alt="" width="28" height="28" />
+      </span>
+      <span class="btn-content">
+        <span class="btn-label">Comprar en</span>
+        <span class="btn-platform">Vinted</span>
+      </span>
+      <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+      </svg>
+    </a>
+  </div>
+  
+  <p class="buy-note">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4M12 8h.01"/>
+    </svg>
+    Serás redirigido a la plataforma externa para completar la compra
+  </p>
+</div>
+
+<style>
+  .buy-buttons {
+    background: linear-gradient(135deg, var(--color-gray-50) 0%, rgba(182, 219, 225, 0.2) 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    border: 1px solid rgba(182, 219, 225, 0.3);
+  }
+  
+  .buy-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+  
+  .buttons-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+  
+  @media (min-width: 480px) {
+    .buttons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .buy-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .buy-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+  
+  .buy-btn.wallapop {
+    background: linear-gradient(135deg, var(--color-wallapop) 0%, rgb(40, 180, 160) 100%);
+    color: var(--color-white);
+    box-shadow: 0 4px 20px rgba(61, 210, 186, 0.35);
+  }
+  
+  .buy-btn.wallapop::before {
+    background: linear-gradient(135deg, rgb(80, 230, 206) 0%, var(--color-wallapop) 100%);
+  }
+  
+  .buy-btn.vinted {
+    background: linear-gradient(135deg, var(--color-vinted) 0%, rgb(0, 90, 100) 100%);
+    color: var(--color-white);
+    box-shadow: 0 4px 20px rgba(0, 119, 130, 0.35);
+  }
+  
+  .buy-btn.vinted::before {
+    background: linear-gradient(135deg, rgb(0, 150, 165) 0%, var(--color-vinted) 100%);
+  }
+  
+  .buy-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+  
+  .buy-btn.wallapop:hover {
+    box-shadow: 0 8px 30px rgba(61, 210, 186, 0.5);
+  }
+  
+  .buy-btn.vinted:hover {
+    box-shadow: 0 8px 30px rgba(0, 119, 130, 0.5);
+  }
+  
+  .buy-btn:hover::before {
+    opacity: 1;
+  }
+  
+  .btn-icon {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  
+  .btn-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .btn-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+  
+  .btn-platform {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+  
+  .btn-arrow {
+    position: relative;
+    z-index: 1;
+    opacity: 0.7;
+    transition: all var(--transition-base);
+    flex-shrink: 0;
+  }
+  
+  .buy-btn:hover .btn-arrow {
+    opacity: 1;
+    transform: translate(3px, -3px);
+  }
+  
+  .buy-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-lg);
+    font-size: 0.8125rem;
+    color: var(--color-gray-500);
+    text-align: center;
+  }
+</style>

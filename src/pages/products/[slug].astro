@@ -1,0 +1,604 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BuyButtons from '../../components/BuyButtons.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getProductoBySlug, getProductos, getImageUrl, formatPrice } from '../../lib/supabase';
+
+export async function getStaticPaths() {
+  const productos = await getProductos();
+  
+  return productos.map((producto) => ({
+    params: { slug: producto.slug },
+    props: { producto },
+  }));
+}
+
+const { producto } = Astro.props;
+
+if (!producto) {
+  return Astro.redirect('/products/');
+}
+
+// Get related products (same category, excluding current)
+const allProducts = await getProductos();
+const relatedProducts = allProducts
+  .filter(p => p.id !== producto.id && p.categoria === producto.categoria)
+  .slice(0, 3);
+
+const mainImage = producto.imagenes?.[0] 
+  ? getImageUrl(producto.imagenes[0]) 
+  : '/placeholder-product.svg';
+
+const images = producto.imagenes?.map(img => getImageUrl(img)) || [mainImage];
+---
+
+<Layout 
+  title={producto.titulo}
+  description={producto.descripcion || `${producto.titulo} - Mando a distancia compatible con ${producto.categoria}. Disponible en Wallapop y Vinted.`}
+  type="product"
+>
+  <article class="product-page">
+    <div class="product-bg"></div>
+    
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/products/">Productos</a></li>
+          <li aria-current="page">{producto.titulo}</li>
+        </ol>
+      </nav>
+      
+      <div class="product-layout">
+        <!-- Gallery Section -->
+        <div class="gallery-section">
+          <div class="main-image-container" id="gallery-container">
+            {producto.destacado && (
+              <span class="badge-featured">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                Destacado
+              </span>
+            )}
+            <img 
+              src={mainImage} 
+              alt={producto.titulo}
+              class="main-image"
+              id="main-image"
+            />
+            
+            {images.length > 1 && (
+              <>
+                <button class="gallery-arrow gallery-arrow-prev" id="prev-btn" aria-label="Imagen anterior">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button class="gallery-arrow gallery-arrow-next" id="next-btn" aria-label="Siguiente imagen">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+                
+                <div class="gallery-dots" id="gallery-dots">
+                  {images.map((_, index) => (
+                    <button 
+                      class={`gallery-dot ${index === 0 ? 'active' : ''}`}
+                      data-index={index}
+                      aria-label={`Ir a imagen ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+          
+          {images.length > 1 && (
+            <div class="thumbnails">
+              {images.map((img, index) => (
+                <button 
+                  class={`thumbnail ${index === 0 ? 'active' : ''}`}
+                  data-image={img}
+                  data-index={index}
+                  aria-label={`Ver imagen ${index + 1}`}
+                >
+                  <img src={img} alt={`${producto.titulo} - Imagen ${index + 1}`} />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        
+        <!-- Info Section -->
+        <div class="info-section">
+          {producto.categoria && (
+            <span class="product-category">{producto.categoria}</span>
+          )}
+          
+          <h1 class="product-title">{producto.titulo}</h1>
+          
+          <div class="product-price">
+            {formatPrice(producto.precio)}
+          </div>
+          
+          <!-- Buy Buttons -->
+          <BuyButtons productTitle={producto.titulo} />
+          
+          {producto.descripcion && (
+            <div class="product-description">
+              <h2 class="description-title">Descripción</h2>
+              <div class="description-content">
+                {producto.descripcion}
+              </div>
+            </div>
+          )}
+          
+          <!-- Product Features -->
+          <div class="product-features">
+            <div class="feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Pago Seguro</span>
+            </div>
+            <div class="feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span>Calidad Precio Imbatible</span>
+            </div>
+            <div class="feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"/>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+              <span>Envíos Rápidos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Related Products -->
+      {relatedProducts.length > 0 && (
+        <section class="related-section">
+          <h2 class="related-title">Productos Relacionados</h2>
+          <div class="related-grid grid grid-3">
+            {relatedProducts.map((product, index) => (
+              <ProductCard producto={product} index={index} />
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .product-page {
+    position: relative;
+    min-height: calc(100vh - 80px);
+    padding-top: 100px;
+    padding-bottom: var(--space-4xl);
+    background: var(--color-gray-50);
+  }
+  
+  .product-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 20%, rgba(182, 219, 225, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(3, 55, 70, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* Breadcrumb */
+  .breadcrumb {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+  }
+  
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-gray-500);
+  }
+  
+  .breadcrumb li:not(:last-child)::after {
+    content: '/';
+    color: var(--color-gray-300);
+  }
+  
+  .breadcrumb a {
+    color: var(--color-gray-600);
+    transition: color var(--transition-base);
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--color-primary);
+  }
+  
+  /* Product Layout */
+  .product-layout {
+    display: grid;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-4xl);
+  }
+  
+  @media (min-width: 1024px) {
+    .product-layout {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+  
+  /* Gallery */
+  .gallery-section {
+    position: relative;
+  }
+  
+  .main-image-container {
+    position: relative;
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .main-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  
+  /* Gallery Navigation Arrows */
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    opacity: 0;
+  }
+  
+  .main-image-container:hover .gallery-arrow {
+    opacity: 1;
+  }
+  
+  .gallery-arrow:hover {
+    background: var(--color-white);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .gallery-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+  
+  .gallery-arrow svg {
+    color: var(--color-gray-700);
+  }
+  
+  .gallery-arrow-prev {
+    left: var(--space-md);
+  }
+  
+  .gallery-arrow-next {
+    right: var(--space-md);
+  }
+  
+  /* Gallery Dots */
+  .gallery-dots {
+    position: absolute;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-full);
+    z-index: 10;
+  }
+  
+  .gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    padding: 0;
+  }
+  
+  .gallery-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .gallery-dot.active {
+    background: var(--color-white);
+    transform: scale(1.2);
+  }
+  
+  /* Touch feedback */
+  @media (hover: none) {
+    .gallery-arrow {
+      opacity: 1;
+    }
+  }
+  
+  .badge-featured {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: var(--color-white);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+    z-index: 10;
+  }
+  
+  .thumbnails {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    padding: var(--space-sm);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .thumbnail {
+    flex: 1;
+    max-width: 80px;
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all var(--transition-base);
+    cursor: pointer;
+  }
+  
+  .thumbnail:hover {
+    border-color: var(--color-secondary);
+  }
+  
+  .thumbnail.active {
+    border-color: var(--color-primary);
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Info Section */
+  .info-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  
+  .product-category {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    background: var(--color-secondary-light);
+    color: var(--color-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: fit-content;
+  }
+  
+  .product-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--color-gray-900);
+    line-height: 1.2;
+  }
+  
+  .product-price {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  
+  /* Description */
+  .product-description {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-gray-200);
+  }
+  
+  .description-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .description-content {
+    font-size: 1rem;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+  
+  /* Features */
+  .product-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-gray-200);
+  }
+  
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    color: var(--color-gray-700);
+    border: 1px solid var(--color-gray-200);
+  }
+  
+  .feature svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  
+  /* Related Products */
+  .related-section {
+    padding-top: var(--space-3xl);
+    border-top: 1px solid var(--color-gray-200);
+  }
+  
+  .related-title {
+    font-size: 1.5rem;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+</style>
+
+<script>
+  // Gallery configuration
+  const mainImage = document.getElementById('main-image') as HTMLImageElement;
+  const galleryContainer = document.getElementById('gallery-container');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const dots = document.querySelectorAll('.gallery-dot');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  
+  // Get all image URLs from thumbnails
+  const images: string[] = [];
+  thumbnails.forEach(thumb => {
+    const url = (thumb as HTMLElement).dataset.image;
+    if (url) images.push(url);
+  });
+  
+  let currentIndex = 0;
+  
+  // Function to update the gallery to show image at given index
+  function showImage(index: number) {
+    if (images.length === 0) return;
+    
+    // Wrap around
+    if (index < 0) index = images.length - 1;
+    if (index >= images.length) index = 0;
+    
+    currentIndex = index;
+    
+    // Update main image with fade effect
+    if (mainImage) {
+      mainImage.style.opacity = '0.5';
+      setTimeout(() => {
+        mainImage.src = images[currentIndex];
+        mainImage.style.opacity = '1';
+      }, 100);
+    }
+    
+    // Update thumbnails
+    thumbnails.forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === currentIndex);
+    });
+    
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+  
+  // Arrow navigation
+  prevBtn?.addEventListener('click', () => showImage(currentIndex - 1));
+  nextBtn?.addEventListener('click', () => showImage(currentIndex + 1));
+  
+  // Thumbnail clicks
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => showImage(index));
+  });
+  
+  // Dot clicks
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => showImage(index));
+  });
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+    if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+  });
+  
+  // Touch/Swipe support
+  if (galleryContainer) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50;
+    
+    galleryContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    galleryContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      
+      if (Math.abs(swipeDistance) >= minSwipeDistance) {
+        if (swipeDistance > 0) {
+          // Swiped right - show previous
+          showImage(currentIndex - 1);
+        } else {
+          // Swiped left - show next
+          showImage(currentIndex + 1);
+        }
+      }
+    }
+  }
+  
+  // Add smooth transition to main image
+  if (mainImage) {
+    mainImage.style.transition = 'opacity 0.2s ease';
+  }
+</script>

@@ -1,0 +1,174 @@
+---
+import { getImageUrl, formatPrice, type Producto } from '../lib/supabase';
+
+interface Props {
+  producto: Producto;
+  index?: number;
+}
+
+const { producto, index = 0 } = Astro.props;
+const imageUrl = producto.imagenes?.[0] 
+  ? getImageUrl(producto.imagenes[0]) 
+  : '/placeholder-product.svg';
+---
+
+<article 
+  class="product-card"
+  style={`animation-delay: ${index * 100}ms`}
+>
+  <a href={`/products/${producto.slug}/`} class="product-link">
+    <div class="product-image">
+      <img 
+        src={imageUrl} 
+        alt={producto.titulo}
+        loading="lazy"
+        decoding="async"
+      />
+      {producto.destacado && (
+        <span class="badge-featured">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          Destacado
+        </span>
+      )}
+      <div class="product-overlay">
+        <span class="view-btn">Ver producto</span>
+      </div>
+    </div>
+    
+    <div class="product-info">
+      {producto.categoria && (
+        <span class="product-category">{producto.categoria}</span>
+      )}
+      <h3 class="product-title">{producto.titulo}</h3>
+      <p class="product-price">{formatPrice(producto.precio)}</p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .product-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+  }
+  
+  .product-link {
+    display: block;
+    height: 100%;
+  }
+  
+  .product-image {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+  
+  .product-card:hover .product-image img {
+    transform: scale(1.08);
+  }
+  
+  .badge-featured {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+    z-index: 10;
+  }
+  
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3, 55, 70, 0.6);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+  
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+  
+  .view-btn {
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-white);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: var(--radius-lg);
+    transform: translateY(10px);
+    transition: transform var(--transition-base);
+  }
+  
+  .product-card:hover .view-btn {
+    transform: translateY(0);
+  }
+  
+  .product-info {
+    padding: var(--space-lg);
+  }
+  
+  .product-category {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--color-secondary-light);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  
+  .product-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-gray-800);
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .product-price {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+</style>

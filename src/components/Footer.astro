@@ -1,0 +1,276 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  { href: '/devoluciones', label: 'Devoluciones' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/sobre-nosotros', label: 'Sobre Nosotros' },
+  { href: '/contacto', label: 'Contacto' },
+];
+---
+
+<footer class="footer">
+  <div class="footer-glow"></div>
+  
+  <div class="footer-content container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <img src="/octopus-control.svg" alt="Octopus Control" class="footer-logo-img" />
+        </a>
+        <p class="footer-description">
+          Tu tienda de confianza de mandos a distancia verificados.
+        </p>
+      </div>
+      
+      <nav class="footer-nav" aria-label="Navegación de pie de página">
+        <h3 class="footer-heading">Información</h3>
+        <ul class="footer-nav-list">
+          {footerLinks.map((link) => (
+            <li>
+              <a href={link.href} class="footer-link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      
+      <div class="footer-platforms">
+        <h3 class="footer-heading">Encuéntranos en</h3>
+        <div class="platform-badges">
+          <a 
+            href="https://es.wallapop.com/user/oliverm-441214038"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="platform-badge wallapop"
+            aria-label="Ver productos en Wallapop"
+          >
+            <img src="/wallapop.svg" alt="Wallapop" class="platform-icon" />
+            <span>Wallapop</span>
+          </a>
+          <a 
+            href="https://www.vinted.es/member/237495534"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="platform-badge vinted"
+            aria-label="Ver productos en Vinted"
+          >
+            <img src="/vinted.svg" alt="Vinted" class="platform-icon" />
+            <span>Vinted</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="/legal/aviso-legal" class="legal-link">Aviso Legal</a>
+        <span class="legal-separator">•</span>
+        <a href="/legal/privacidad" class="legal-link">Política de Privacidad</a>
+        <span class="legal-separator">•</span>
+        <a href="/legal/terminos" class="legal-link">Términos del Servicio</a>
+        <span class="legal-separator">•</span>
+        <a href="/legal/cookies" class="legal-link">Política de Cookies</a>
+      </div>
+      <p class="copyright">
+        © {currentYear} Octopus Control. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    overflow: hidden;
+  }
+  
+  .footer-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(182, 219, 225, 0.15) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+  
+  .footer-content {
+    position: relative;
+    padding: var(--space-3xl) var(--space-md);
+  }
+  
+  @media (min-width: 768px) {
+    .footer-content {
+      padding: var(--space-4xl) var(--space-xl);
+    }
+  }
+  
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+  }
+  
+  @media (min-width: 768px) {
+    .footer-main {
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+  
+  /* Brand Section */
+  .footer-brand {
+    max-width: 350px;
+  }
+  
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    transition: transform var(--transition-base);
+  }
+  
+  .footer-logo:hover {
+    transform: scale(1.02);
+  }
+  
+  .footer-logo-img {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+  
+  .footer-description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Footer Headings */
+  .footer-heading {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Navigation */
+  .footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .footer-link {
+    display: inline-block;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding: var(--space-xs) 0;
+    transition: all var(--transition-base);
+  }
+  
+  .footer-link:hover {
+    color: var(--color-secondary);
+    transform: translateX(4px);
+  }
+  
+  /* Platform Badges */
+  .platform-badges {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .platform-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-base);
+    width: fit-content;
+  }
+  
+  .platform-badge.wallapop {
+    background: rgba(61, 210, 186, 0.2);
+    color: var(--color-wallapop);
+    border: 1px solid rgba(61, 210, 186, 0.3);
+  }
+  
+  .platform-badge.wallapop:hover {
+    background: var(--color-wallapop);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+  
+  .platform-badge.vinted {
+    background: rgba(0, 119, 130, 0.2);
+    color: rgb(100, 200, 210);
+    border: 1px solid rgba(0, 119, 130, 0.3);
+  }
+  
+  .platform-badge.vinted:hover {
+    background: var(--color-vinted);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+  
+  .platform-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Footer Bottom */
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .legal-link {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.2s ease;
+  }
+
+  .legal-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .legal-separator {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+  }
+  
+  .copyright {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+</style>

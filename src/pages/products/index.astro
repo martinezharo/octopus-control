@@ -1,0 +1,249 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FilterPanel from '../../components/FilterPanel.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getProductos, getCategorias } from '../../lib/supabase';
+
+const productos = await getProductos();
+const categorias = await getCategorias();
+
+// Default sort: Featured first (A-Z), others later (Z-A)
+const sortedProducts = [...productos].sort((a, b) => {
+  if (a.destacado !== b.destacado) {
+    return (b.destacado ? 1 : 0) - (a.destacado ? 1 : 0);
+  }
+  
+  if (a.destacado) {
+    // Featured products: A-Z
+    return a.titulo.localeCompare(b.titulo, 'es');
+  } else {
+    // Non-featured products: Z-A
+    return b.titulo.localeCompare(a.titulo, 'es');
+  }
+});
+---
+
+<Layout 
+  title="Productos" 
+  description="Explora nuestro catálogo de mandos a distancia verificados. Mandos de calidad al mejor precio comprobado."
+>
+  <section class="catalog-section">
+    <div class="catalog-bg"></div>
+    
+    <div class="container">
+      <!-- Page Header -->
+      <header class="page-header">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Inicio</a></li>
+            <li aria-current="page">Productos</li>
+          </ol>
+        </nav>
+        
+        <h1 class="page-title animate-fadeInUp">
+          Nuestros <span class="highlight">Productos</span>
+        </h1>
+        <p class="page-description animate-fadeInUp delay-100">
+          Explora nuestra colección de mandos a distancia.
+        </p>
+        
+        <div class="products-count animate-fadeIn delay-200">
+          <span id="visible-count">{productos.length}</span> productos disponibles
+        </div>
+      </header>
+      
+      <!-- Filter Panel -->
+      <FilterPanel categorias={categorias} />
+      
+      <!-- Products Grid -->
+      {sortedProducts.length > 0 ? (
+        <div class="products-grid grid grid-3" id="product-grid">
+          {sortedProducts.map((producto, index) => (
+            <div 
+              class="product-card-wrapper" 
+              data-category={producto.categoria || ''}
+              data-price={producto.precio || 0}
+              data-title={producto.titulo}
+              data-featured={producto.destacado}
+            >
+              <ProductCard producto={producto} index={index} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state" id="empty-state">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <h2>No hay productos disponibles</h2>
+          <p>Vuelve pronto, estamos preparando nuevos productos increíbles.</p>
+        </div>
+      )}
+      
+      <!-- Hidden empty state for filter results -->
+      <div class="empty-state filter-empty" id="filter-empty" style="display: none;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+        </svg>
+        <h3>No se encontraron productos</h3>
+        <p>Prueba con otros filtros o categorías.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .catalog-section {
+    position: relative;
+    min-height: calc(100vh - 80px);
+    padding-top: 100px;
+    padding-bottom: var(--space-4xl);
+    background: var(--color-gray-50);
+  }
+  
+  .catalog-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 10% 20%, rgba(182, 219, 225, 0.4) 0%, transparent 40%),
+      radial-gradient(ellipse at 90% 80%, rgba(3, 55, 70, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  
+  /* Page Header */
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+  
+  .breadcrumb ol {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    font-size: 0.875rem;
+  }
+  
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-gray-500);
+  }
+  
+  .breadcrumb li:not(:last-child)::after {
+    content: '/';
+    color: var(--color-gray-300);
+  }
+  
+  .breadcrumb a {
+    color: var(--color-gray-600);
+    transition: color var(--transition-base);
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--color-primary);
+  }
+  
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-md);
+  }
+  
+  .page-title .highlight {
+    color: var(--color-primary);
+  }
+  
+  .page-description {
+    font-size: 1.0625rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto var(--space-lg);
+    line-height: 1.7;
+  }
+  
+  .products-count {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-white);
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .products-count span {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  
+  /* Products Grid */
+  .products-grid {
+    margin-top: var(--space-xl);
+  }
+  
+  /* Empty States */
+  .empty-state {
+    text-align: center;
+    padding: var(--space-4xl) var(--space-xl);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    border: 2px dashed var(--color-gray-200);
+  }
+  
+  .empty-state svg {
+    color: var(--color-gray-300);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .empty-state h2,
+  .empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .empty-state p {
+    color: var(--color-gray-500);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .filter-empty {
+    margin-top: var(--space-xl);
+  }
+</style>
+
+<script>
+  // Update visible count when filtering
+  const updateCount = () => {
+    const grid = document.getElementById('product-grid');
+    const countEl = document.getElementById('visible-count');
+    const filterEmpty = document.getElementById('filter-empty');
+    
+    if (!grid || !countEl) return;
+    
+    const visibleProducts = grid.querySelectorAll('.product-card-wrapper:not([style*="display: none"])');
+    countEl.textContent = visibleProducts.length.toString();
+    
+    if (filterEmpty) {
+      filterEmpty.style.display = visibleProducts.length === 0 ? 'block' : 'none';
+    }
+  };
+  
+  // Observe changes to the product grid
+  const observer = new MutationObserver(updateCount);
+  const grid = document.getElementById('product-grid');
+  
+  if (grid) {
+    observer.observe(grid, { 
+      attributes: true, 
+      subtree: true, 
+      attributeFilter: ['style'] 
+    });
+  }
+</script>

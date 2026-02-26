@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://octopuscontrol.com/sitemap.xml
