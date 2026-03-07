@@ -87,4 +87,4 @@ This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE)
 
 ---
 
-Developed with ❤️ by [Oli](https://github.com/martinezharo).
+Developed with ❤️ by [Oli](https://olivermartinezharo.com).
