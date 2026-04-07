@@ -45,12 +45,7 @@ To work on this project, you will need:
     pnpm install
     ```
 
-3.  Configure environment variables:
-    Create a `.env` file based on `.env.example` (if it exists) or add your Supabase credentials:
-    ```env
-    PUBLIC_SUPABASE_URL=your_supabase_url
-    PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-    ```
+3.  No environment variables are required! The project uses static JSON data located in `src/data/productos.json`.
 
 4.  Start the development server:
     ```bash

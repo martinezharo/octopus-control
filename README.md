@@ -1,7 +1,7 @@
 # 🐙 Octopus Control - Web E-commerce
 
 ![Astro](https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![JSON](https://img.shields.io/badge/Data-JSON-blue?style=for-the-badge&logo=json&logoColor=white)
 ![Cloudflare](https://img.shields.io/badge/Cloudflare_Pages-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
 ![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
@@ -12,14 +12,14 @@
 - 🔍 **Advanced Filtering**: Search and filter system by brand and category to locate products almost instantly.
 - 📱 **Responsive Design**: Fully optimized for mobile devices, tablets, and desktops.
 - ⚡ **High Performance**: Developed with Astro 5 for ultra-fast loading (Islands Architecture).
-- ☁️ **Serverless Backend**: Integration with Supabase for dynamic product and stock management.
+- 📂 **Static Data**: Products are managed via a static JSON file for maximum speed and simplicity.
 - 🎨 **Premium Aesthetics**: Modern, clean, and conversion-focused interface.
 - 📦 **Shipping Management**: Clear information on shipping, returns, and warranty policies.
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: [Astro](https://astro.build/) (v5+)
-- **Database / Backend**: [Supabase](https://supabase.com/)
+- **Data Source**: Static JSON (`src/data/productos.json`)
 - **Package Management**: [pnpm](https://pnpm.io/)
 - **Deployment**: [Cloudflare Pages](https://pages.cloudflare.com/)
 - **Styling**: Vanilla CSS with modern variables.
@@ -45,14 +45,7 @@ To run the project locally, follow these steps:
     pnpm install
     ```
 
-3.  **Environment Variables**
-    Create a `.env` file in the project root and add your Supabase keys:
-    ```env
-    PUBLIC_SUPABASE_URL=your_url_here
-    PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
-    ```
-
-4.  **Run the development server**
+3.  **Run the development server**
     ```bash
     pnpm dev
     ```
@@ -65,11 +58,11 @@ To run the project locally, follow these steps:
 ├── public/          # Static assets
 ├── src/
 │   ├── components/  # UI Components (.astro)
+│   ├── data/        # Static data files (JSON)
 │   ├── layouts/     # Base page layouts
-│   ├── lib/         # Client logic and connection (Supabase)
+│   ├── lib/         # Utility functions and data fetching
 │   ├── pages/       # Routes and application pages
 │   └── styles/      # Global CSS styles
-├── supabase/        # Database configurations
 ├── astro.config.mjs # Main Astro configuration
 └── package.json     # Dependencies and scripts
 ```
