@@ -1,9 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+import productosData from '../data/productos.json';
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-
-export const supabase = createClient(supabaseUrl, supabaseKey);
+const STORAGE_BASE_URL = 'https://fhuujhrlmdfnpnnucxfv.supabase.co/storage/v1/object/public/productos/';
 
 export interface Producto {
     id: number;
@@ -18,77 +15,35 @@ export interface Producto {
     activo: boolean;
 }
 
+const productos: Producto[] = productosData as Producto[];
+
 export async function getProductos(): Promise<Producto[]> {
-    const { data, error } = await supabase
-        .from('productos')
-        .select('*')
-        .eq('activo', true)
-        .order('titulo', { ascending: false });
-
-    if (error) {
-        console.error('Error fetching productos:', error);
-        return [];
-    }
-
-    return data || [];
+    return productos.filter(p => p.activo).sort((a, b) => b.titulo.localeCompare(a.titulo, 'es'));
 }
 
 export async function getProductoBySlug(slug: string): Promise<Producto | null> {
-    const { data, error } = await supabase
-        .from('productos')
-        .select('*')
-        .eq('slug', slug)
-        .eq('activo', true)
-        .single();
-
-    if (error) {
-        console.error('Error fetching producto:', error);
-        return null;
-    }
-
-    return data;
+    return productos.find(p => p.slug === slug && p.activo) ?? null;
 }
 
 export async function getProductosDestacados(): Promise<Producto[]> {
-    const { data, error } = await supabase
-        .from('productos')
-        .select('*')
-        .eq('activo', true)
-        .eq('destacado', true)
-        .order('titulo', { ascending: false });
-
-    if (error) {
-        console.error('Error fetching productos destacados:', error);
-        return [];
-    }
-
-    return data || [];
+    return productos
+        .filter(p => p.activo && p.destacado)
+        .sort((a, b) => b.titulo.localeCompare(a.titulo, 'es'));
 }
 
 export async function getCategorias(): Promise<string[]> {
-    const { data, error } = await supabase
-        .from('productos')
-        .select('categoria')
-        .eq('activo', true)
-        .not('categoria', 'is', null);
-
-    if (error) {
-        console.error('Error fetching categorias:', error);
-        return [];
-    }
-
-    const categorias = [...new Set(data?.map(p => p.categoria).filter(Boolean) as string[])];
+    const categorias = [...new Set(
+        productos
+            .filter(p => p.activo && p.categoria)
+            .map(p => p.categoria as string)
+    )];
     return categorias.sort();
 }
 
 export function getImageUrl(imagePath: string): string {
     if (!imagePath) return '/placeholder-product.svg';
-
-    // If it's already a full URL, return it
     if (imagePath.startsWith('http')) return imagePath;
-
-    // Build Supabase storage URL
-    return `${supabaseUrl}/storage/v1/object/public/productos/${encodeURIComponent(imagePath)}`;
+    return `${STORAGE_BASE_URL}${encodeURIComponent(imagePath)}`;
 }
 
 export function formatPrice(precio: number | null): string {

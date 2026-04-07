@@ -1,0 +1,646 @@
+[
+    {
+        "id": 240,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Xiaomi XMRM-19",
+        "slug": "xiaomi-xmrm-19",
+        "descripcion": "Control remoto para dispositivos Xiaomi, completamente nuevo.\r\n- F\u00e1cil configuraci\u00f3n.\r\n- Control por Voz\r\n- Bot\u00f3n de acceso directo a Netflix y Prime Video.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 5.5,
+        "categoria": "Xiaomi",
+        "imagenes": [
+            "xiaomi-xmrm-19/xiaomi-xmrm-19-1.webp",
+            "xiaomi-xmrm-19/xiaomi-xmrm-19-2.webp",
+            "xiaomi-xmrm-19/xiaomi-xmrm-19-3.webp",
+            "xiaomi-xmrm-19/xiaomi-xmrm-19-4.webp",
+            "xiaomi-xmrm-19/xiaomi-xmrm-19-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 239,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Xiaomi XMRM-010",
+        "slug": "mando-xmrm-010-xiaomi",
+        "descripcion": "Control remoto para dispositivos Xiaomi, completamente nuevo.\r\n- F\u00e1cil configuraci\u00f3n.\r\n- Control por Voz\r\n- Bot\u00f3n de acceso directo a Netflix y Prime Video.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 5.5,
+        "categoria": "Xiaomi",
+        "imagenes": [
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-1.webp",
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-2.webp",
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-3.webp",
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-4.webp",
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-5.webp",
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-6.webp",
+            "xiaomi-xmrm-010/xiaomi-xmrm-010-7.webp"
+        ],
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 237,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Xiaomi XMRM-006",
+        "slug": "mando-xiaomi-xmrm-006",
+        "descripcion": "Control remoto para dispositivos Xiaomi como Xiaomi MI Box S o MI TV Stick, completamente nuevo.\r\n- F\u00e1cil configuraci\u00f3n.\r\n- Control por Voz\r\n- Bot\u00f3n de acceso directo a Netflix y Prime Video.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.5,
+        "categoria": "Xiaomi",
+        "imagenes": [
+            "xiaomi-xmrm-006/xiaomi-xmrm-006-1.webp",
+            "xiaomi-xmrm-006/xiaomi-xmrm-006-2.webp",
+            "xiaomi-xmrm-006/xiaomi-xmrm-006-3.webp",
+            "xiaomi-xmrm-006/xiaomi-xmrm-006-4.webp",
+            "xiaomi-xmrm-006/xiaomi-xmrm-006-5.webp"
+        ],
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 236,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Toshiba CT-90326",
+        "slug": "mando-toshiba-ct-90326",
+        "descripcion": "Control remoto para televisores Toshiba, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.49,
+        "categoria": "Toshiba",
+        "imagenes": [
+            "toshiba-ct-90326/toshiba-ct-90326-1.webp",
+            "toshiba-ct-90326/toshiba-ct-90326-2.webp",
+            "toshiba-ct-90326/toshiba-ct-90326-3.webp",
+            "toshiba-ct-90326/toshiba-ct-90326-4.webp",
+            "toshiba-ct-90326/toshiba-ct-90326-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 229,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Samsung BN59-01385A Solar",
+        "slug": "mando-samsung-bn59-01385a-solar",
+        "descripcion": "Control remoto para televisores Samsung Smart TV, completamente nuevo.\r\n- No necesita configuraci\u00f3n, listo para usar.\r\n- Con carga Solar y por USB-C.\r\n- Control por Voz.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 17.99,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-bn59-01385a/samsung-bn59-01385a-1.webp",
+            "samsung-bn59-01385a/samsung-bn59-01385a-2.webp",
+            "samsung-bn59-01385a/samsung-bn59-01385a-3.webp",
+            "samsung-bn59-01385a/samsung-bn59-01385a-4.webp",
+            "samsung-bn59-01385a/samsung-bn59-01385a-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 228,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Samsung BN59-01358D",
+        "slug": "samsung-bn59-01358d",
+        "descripcion": "Control remoto para televisores Samsung Smart TV (y convencionales), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Bot\u00f3n de acceso directo a Netflix y Prime Video.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2.49,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-bn59-01358d/samsung-bn59-01358d-1.webp",
+            "samsung-bn59-01358d/samsung-bn59-01358d-2.webp",
+            "samsung-bn59-01358d/samsung-bn59-01358d-3.webp",
+            "samsung-bn59-01358d/samsung-bn59-01358d-4.webp",
+            "samsung-bn59-01358d/samsung-bn59-01358d-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 222,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Samsung BN59-01259B Blanco",
+        "slug": "mando-blanco-bn59-01259b-samsung",
+        "descripcion": "Control remoto para televisores Samsung Smart TV (y convencionales), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2.5,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-bn59-01259b-blanco/samsung-bn59-01259b-blanco-1.webp",
+            "samsung-bn59-01259b-blanco/samsung-bn59-01259b-blanco-2.webp",
+            "samsung-bn59-01259b-blanco/samsung-bn59-01259b-blanco-3.webp",
+            "samsung-bn59-01259b-blanco/samsung-bn59-01259b-blanco-4.webp",
+            "samsung-bn59-01259b-blanco/samsung-bn59-01259b-blanco-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 217,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Samsung AA59-00582A",
+        "slug": "mando-aa5900582a-samsung",
+        "descripcion": "Control remoto para televisores Samsung Smart TV (y convencionales), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2.99,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-aa59-00582a/samsung-aa59-00582a-1.webp",
+            "samsung-aa59-00582a/samsung-aa59-00582a-2.webp",
+            "samsung-aa59-00582a/samsung-aa59-00582a-3.webp",
+            "samsung-aa59-00582a/samsung-aa59-00582a-4.webp",
+            "samsung-aa59-00582a/samsung-aa59-00582a-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 216,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando PHILIPS 398GR08BEPHN0019CR",
+        "slug": "mando-philips-398gr08bephn0019cr",
+        "descripcion": "Control remoto para televisores Philips Smart TV, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Bot\u00f3n de acceso directo a Netflix.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.49,
+        "categoria": "Philips",
+        "imagenes": [
+            "philips-398gr08bephn0019cr/philips-398gr08bephn0019cr-1.webp",
+            "philips-398gr08bephn0019cr/philips-398gr08bephn0019cr-2.webp",
+            "philips-398gr08bephn0019cr/philips-398gr08bephn0019cr-3.webp",
+            "philips-398gr08bephn0019cr/philips-398gr08bephn0019cr-4.webp",
+            "philips-398gr08bephn0019cr/philips-398gr08bephn0019cr-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 187,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando para Fire TV 3a Gen",
+        "slug": "mando-amazon-fire-tv",
+        "descripcion": "- Compatible con los siguientes modelos de Fire TV: Amazon Fire TV Stick Lite, Amazon Fire TV Stick (2a y 3a generaci\u00f3n), Amazon Fire TV Stick 4K, Amazon Fire TV Stick 4K Max y Amazon Fire TV Cube (1a y 2a generaci\u00f3n).\r\n- Control por Voz (Alexa).\r\n- Incluye acceso a videotutorial para f\u00e1cil configuraci\u00f3n.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Funcionamiento garantizado.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 5.5,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-3th-gen-amz-m/ftv-3th-gen-amz-m-1.webp",
+            "ftv-3th-gen-amz-m/ftv-3th-gen-amz-m-2.webp",
+            "ftv-3th-gen-amz-m/ftv-3th-gen-amz-m-3.webp",
+            "ftv-3th-gen-amz-m/ftv-3th-gen-amz-m-4.webp",
+            "ftv-3th-gen-amz-m/ftv-3th-gen-amz-m-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 182,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando para Chromecast",
+        "slug": "mando-chromecast",
+        "descripcion": "Control remoto para Chromecast, completamente nuevo.\r\n- F\u00e1cil configuraci\u00f3n. Incluye acceso a video-tutorial.\r\n- Control por Voz.\r\n- Bot\u00f3n de acceso directo a Netflix y YouTube.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 4.75,
+        "categoria": "Chromecast",
+        "imagenes": [
+            "chr/chr-5.webp",
+            "chr/chr-2.webp",
+            "chr/chr-3.webp",
+            "chr/chr-4.webp",
+            "chr/chr-1.webp",
+            "chr/chr-6.webp"
+        ],
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 213,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG MR24GA con Micr\u00f3fono y Puntero",
+        "slug": "mando-lg-mr24ga",
+        "descripcion": "Control remoto Magic Remote para televisores LG Smart TV webOS de a\u00f1os 2022, 2023 y 2024, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo\r\n- Control por Voz y rat\u00f3n\r\n- Bot\u00f3n de acceso directo a Netflix, Prime Video, Disney+, Alexa...\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos son testeados.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos y protegidos.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 15.99,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-mr24ga/lg-mr24ga-1.webp",
+            "lg-mr24ga/lg-mr24ga-2.webp",
+            "lg-mr24ga/lg-mr24ga-3.webp",
+            "lg-mr24ga/lg-mr24ga-4.webp",
+            "lg-mr24ga/lg-mr24ga-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 212,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG MR22GA con Micr\u00f3fono y Puntero",
+        "slug": "mando-mr22ga-lg",
+        "descripcion": "Control remoto Magic Remote para televisores LG Smart TV webOS de a\u00f1os 2021 y 2022, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo\r\n- Control por Voz y rat\u00f3n\r\n- Bot\u00f3n de acceso directo a Netflix, Prime Video, Disney+, Alexa...\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos son testeados.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos y protegidos.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 7.99,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-mr22ga/lg-mr22ga-1.webp",
+            "lg-mr22ga/lg-mr22ga-2.webp",
+            "lg-mr22ga/lg-mr22ga-3.webp",
+            "lg-mr22ga/lg-mr22ga-4.webp",
+            "lg-mr22ga/lg-mr22ga-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 210,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG MR20GA con Micr\u00f3fono y Puntero",
+        "slug": "mando-mr20ga-lg-magic",
+        "descripcion": "Control remoto AKB75855501 Magic Remote para televisores LG Smart TV webOS de a\u00f1os 2018, 2019 y 2020, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo.\r\n- Control por Voz y rat\u00f3n.\r\n- Bot\u00f3n de acceso directo a Netflix, Prime Video...\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos son testeados.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos y protegidos.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 8.49,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-mr20ga/lg-mr20ga-1.webp",
+            "lg-mr20ga/lg-mr20ga-2.webp",
+            "lg-mr20ga/lg-mr20ga-3.webp",
+            "lg-mr20ga/lg-mr20ga-4.webp",
+            "lg-mr20ga/lg-mr20ga-5.webp",
+            "lg-mr20ga/lg-mr20ga-6.webp"
+        ],
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 204,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG AN-MR600 con Micr\u00f3fono y Puntero",
+        "slug": "mando-lg-magic-remote-an-mr600",
+        "descripcion": "Control remoto Magic Remote para televisores LG Smart TV webOS, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo\r\n- Control por Voz y rat\u00f3n\r\n- S\u00d3LO compatible con:\r\nOLED Curva: EG99 EG96 EG92 EG91\r\nUHD Curva: UF95 UF94 UF86 UF85 UF77 UF69\r\nUHD Plana: UG8\r\n\r\nNOTA: Mando no original LG.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Funcionamiento testeado.\r\n\u2705 Todos los productos est\u00e1n disponibles.\r\n\u2705 Env\u00edos r\u00e1pidos y protegidos.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 11.99,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-an-mr600/lg-an-mr600-1.webp",
+            "lg-an-mr600/lg-an-mr600-2.webp",
+            "lg-an-mr600/lg-an-mr600-3.webp",
+            "lg-an-mr600/lg-an-mr600-4.webp",
+            "lg-an-mr600/lg-an-mr600-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 202,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG AKB75675304",
+        "slug": "lg-akb75675304",
+        "descripcion": "Control remoto universal para televisores LG Smart TV (y convencionales), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Botones de acceso a Netflix y Prime Video.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.49,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-akb75675304/lg-akb75675304-1.webp",
+            "lg-akb75675304/lg-akb75675304-2.webp",
+            "lg-akb75675304/lg-akb75675304-3.webp",
+            "lg-akb75675304/lg-akb75675304-4.webp",
+            "lg-akb75675304/lg-akb75675304-5.webp",
+            "lg-akb75675304/lg-akb75675304-6.webp",
+            "lg-akb75675304/lg-akb75675304-7.webp"
+        ],
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 199,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG AKB74915324",
+        "slug": "mando-lg-akb74915324",
+        "descripcion": "Control remoto para televisores LG convencionales (y Smart TV), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.5,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-akb74915324/lg-akb74915324-1.webp",
+            "lg-akb74915324/lg-akb74915324-2.webp",
+            "lg-akb74915324/lg-akb74915324-3.webp",
+            "lg-akb74915324/lg-akb74915324-4.webp",
+            "lg-akb74915324/lg-akb74915324-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 198,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG AKB73756504",
+        "slug": "mando-akb73756504-lg",
+        "descripcion": "Control remoto para televisores LG convencionales (y Smart TV), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.5,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-akb73756504/lg-akb73756504-1.webp",
+            "lg-akb73756504/lg-akb73756504-2.webp",
+            "lg-akb73756504/lg-akb73756504-3.webp",
+            "lg-akb73756504/lg-akb73756504-4.webp",
+            "lg-akb73756504/lg-akb73756504-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 196,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando LG AKB69680403",
+        "slug": "mando-akb69680403-lg",
+        "descripcion": "Control remoto para televisores LG convencionales (y Smart TV), completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 3.5,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-akb69680403/lg-akb69680403-1.webp",
+            "lg-akb69680403/lg-akb69680403-2.webp",
+            "lg-akb69680403/lg-akb69680403-3.webp",
+            "lg-akb69680403/lg-akb69680403-4.webp",
+            "lg-akb69680403/lg-akb69680403-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 194,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Hisense EN2B27",
+        "slug": "mando-hisense-en2b27",
+        "descripcion": "Control remoto para televisores Hisense Smart TV, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Botones de acceso directo a Netflix y YouTube.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2.5,
+        "categoria": "Hisense",
+        "imagenes": [
+            "hisense-en2b27/hisense-en2b27-1.webp",
+            "hisense-en2b27/hisense-en2b27-2.webp",
+            "hisense-en2b27/hisense-en2b27-3.webp",
+            "hisense-en2b27/hisense-en2b27-4.webp",
+            "hisense-en2b27/hisense-en2b27-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 193,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Hisense EN2A30",
+        "slug": "mando-hisense-en2a30",
+        "descripcion": "Control remoto para televisores Hisense Smart TV, completamente nuevo.\r\n- No necesita configuraci\u00f3n, poner pilas y listo para usar.\r\n- Botones de acceso directo a Netflix y YouTube.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2.75,
+        "categoria": "Hisense",
+        "imagenes": [
+            "hisense-en2a30/hisense-en2a30-1.webp",
+            "hisense-en2a30/hisense-en2a30-2.webp",
+            "hisense-en2a30/hisense-en2a30-3.webp",
+            "hisense-en2a30/hisense-en2a30-4.webp",
+            "hisense-en2a30/hisense-en2a30-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 184,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Fire TV a Estrenar",
+        "slug": "mando-fire-tv",
+        "descripcion": "- Compatible con los siguientes modelos de Fire TV: Amazon Fire TV Stick Lite, Amazon Fire TV Stick (2a y 3a generaci\u00f3n), Amazon Fire TV Stick 4K, Amazon Fire TV Stick 4K Max y Amazon Fire TV Cube (1a y 2a generaci\u00f3n).\r\n- Control por Voz (Alexa).\r\n- Incluye acceso a videotutorial para f\u00e1cil configuraci\u00f3n.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Funcionamiento garantizado.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.",
+        "precio": 3.99,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv/ftv-1.webp",
+            "ftv/ftv-2.webp",
+            "ftv/ftv-3.webp",
+            "ftv/ftv-4.webp",
+            "ftv/ftv-5.webp"
+        ],
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 186,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Fire TV 2a Generaci\u00f3n",
+        "slug": "mando-amazon-fire-tv-2-gen",
+        "descripcion": "Control remoto L5B83H para Amazon Fire TV Stick de Segunda Generaci\u00f3n, completamente nuevo. Dispones de otras versiones para otros Fire TV, consultanos sin compromiso.\r\n\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 4.99,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-2/ftv-2-1.webp",
+            "ftv-2/ftv-2-2.webp",
+            "ftv-2/ftv-2-3.webp",
+            "ftv-2/ftv-2-4.webp",
+            "ftv-2/ftv-2-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 185,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Mando Fire TV 1a Generaci\u00f3n",
+        "slug": "mando-fire-tv-1era-generacion",
+        "descripcion": "Control remoto para Amazon Fire TV Stick de Primera Generaci\u00f3n, completamente nuevo.\r\n- Compatible, no original.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 4.99,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-1/ftv-1-1.webp",
+            "ftv-1/ftv-1-2.webp",
+            "ftv-1/ftv-1-3.webp",
+            "ftv-1/ftv-1-4.webp",
+            "ftv-1/ftv-1-5.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 225,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Samsung BN59-01259B Verde Luminiscente",
+        "slug": "samsung-bn59-01259b-funda-verde-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos para Samsung que compartan la misma forma que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-bn59-01259b-funda-verde-lum/samsung-bn59-01259b-funda-verde-lum-1.webp",
+            "samsung-bn59-01259b-funda-verde-lum/samsung-bn59-01259b-funda-verde-lum-2.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 223,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Samsung BN59-01259B Azul",
+        "slug": "samsung-bn59-01259b-funda-azul-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos para Samsung que compartan la misma forma que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-bn59-01259b-funda-azul-lum/samsung-bn59-01259b-funda-azul-lum-1.webp",
+            "samsung-bn59-01259b-funda-azul-lum/samsung-bn59-01259b-funda-azul-lum-2.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 238,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando XMRM-006 Azul Luminiscente",
+        "slug": "xiaomi-xmrm-006-funda-azul-lum",
+        "descripcion": "Funda azul de silicona brillante en la oscuridad para mandos para dispositivos Xiaomi que compartan la misma forma y disposici\u00f3n de botones que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Xiaomi",
+        "imagenes": [
+            "xiaomi-xmrm-006-funda-azul-lum/xiaomi-xmrm-006-funda-azul-lum-1.webp",
+            "xiaomi-xmrm-006-funda-azul-lum/xiaomi-xmrm-006-funda-azul-lum-2.webp",
+            "xiaomi-xmrm-006-funda-azul-lum/xiaomi-xmrm-006-funda-azul-lum-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 231,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando Samsung Azul Luminiscente",
+        "slug": "samsung-smtv-funda-azul-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos Samsung Smart TV como BN59-01358D y otros.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Samsung",
+        "imagenes": [
+            "samsung-smtv-funda-azul-lum/samsung-smtv-funda-azul-lum-1.webp",
+            "samsung-smtv-funda-azul-lum/samsung-smtv-funda-azul-lum-2.webp",
+            "samsung-smtv-funda-azul-lum/samsung-smtv-funda-azul-lum-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 205,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando LG Azul Luminiscente",
+        "slug": "lg-funda-azul-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos LG b\u00e1sicos c\u00f3mo AKB73715603 o AKB76037601.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-funda-azul-lum/lg-funda-azul-lum-1.webp",
+            "lg-funda-azul-lum/lg-funda-azul-lum-2.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 192,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando Fire TV Verde Luminiscente",
+        "slug": "ftv-3th-gen-funda-verde-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos para Fire TV que compartan la misma forma y disposici\u00f3n de botones que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-3th-gen-funda-verde-lum/ftv-3th-gen-funda-verde-lum-1.webp",
+            "ftv-3th-gen-funda-verde-lum/ftv-3th-gen-funda-verde-lum-2.webp",
+            "ftv-3th-gen-funda-verde-lum/ftv-3th-gen-funda-verde-lum-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 191,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando Fire TV Rosa Luminiscente",
+        "slug": "ftv-3th-gen-funda-rosa-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos para Fire TV que compartan la misma forma y disposici\u00f3n de botones que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-3th-gen-funda-rosa-lum/ftv-3th-gen-funda-rosa-lum-1.webp",
+            "ftv-3th-gen-funda-rosa-lum/ftv-3th-gen-funda-rosa-lum-2.webp",
+            "ftv-3th-gen-funda-rosa-lum/ftv-3th-gen-funda-rosa-lum-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 190,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando Fire TV Negra",
+        "slug": "ftv-3th-gen-funda-negra",
+        "descripcion": "Funda de silicona para mandos para Fire TV que compartan la misma forma y disposici\u00f3n de botones que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-3th-gen-funda-negra/ftv-3th-gen-funda-negra-1.webp",
+            "ftv-3th-gen-funda-negra/ftv-3th-gen-funda-negra-2.webp",
+            "ftv-3th-gen-funda-negra/ftv-3th-gen-funda-negra-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 189,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando Fire TV Morada a Estrenar",
+        "slug": "ftv-3th-gen-funda-morada",
+        "descripcion": "Funda de silicona para mandos para Fire TV que compartan la misma forma y disposici\u00f3n de botones que los de la imagen.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Fire TV",
+        "imagenes": [
+            "ftv-3th-gen-funda-morada/ftv-3th-gen-funda-morada-1.webp",
+            "ftv-3th-gen-funda-morada/ftv-3th-gen-funda-morada-2.webp",
+            "ftv-3th-gen-funda-morada/ftv-3th-gen-funda-morada-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 183,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda Mando Chromecast Azul Luminiscente",
+        "slug": "chr-funda-azul-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos de Google Chromecast.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Chromecast",
+        "imagenes": [
+            "chr-funda-azul-lum/chr-funda-azul-lum-1.webp",
+            "chr-funda-azul-lum/chr-funda-azul-lum-2.webp",
+            "chr-funda-azul-lum/chr-funda-azul-lum-3.webp",
+            "chr-funda-azul-lum/chr-funda-azul-lum-4.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 211,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda LG MR21,22,23,24 Verde Luminiscente",
+        "slug": "lg-mr21-24-funda-verde-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos Magic Remote de LG de 2021 a 2024.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-mr21-24-funda-verde-lum/lg-mr21-24-funda-verde-lum-1.webp",
+            "lg-mr21-24-funda-verde-lum/lg-mr21-24-funda-verde-lum-2.webp",
+            "lg-mr21-24-funda-verde-lum/lg-mr21-24-funda-verde-lum-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 207,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda LG MR15-20 Azul Luminiscente",
+        "slug": "lg-mr15-20-funda-azul-lum",
+        "descripcion": "Funda de silicona brillante en la oscuridad para mandos Magic Remote de LG de 2015 a 2020.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-mr15-20-funda-azul-lum/lg-mr15-20-funda-azul-lum-1.webp",
+            "lg-mr15-20-funda-azul-lum/lg-mr15-20-funda-azul-lum-2.webp",
+            "lg-mr15-20-funda-azul-lum/lg-mr15-20-funda-azul-lum-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 208,
+        "created_at": "2026-02-07T10:56:51.541706+00:00",
+        "titulo": "Funda LG MR15-20",
+        "slug": "lg-mr15-20-funda-negra",
+        "descripcion": "Funda de silicona para mandos Magic Remote de LG de 2015 a 2020.\r\n\r\nSomos Octopus Control, una marca seria y profesional especializada en mandos a distancia.\r\n\r\n\u2705 Todos nuestros mandos se prueban para garantizar su correcto funcionamiento.\r\n\u2705 Todos los productos publicados est\u00e1n disponibles para env\u00edo inmediato.\r\n\u2705 Env\u00edos r\u00e1pidos, bien protegidos y seguros.\r\n\u2705 Devoluciones sin complicaciones.",
+        "precio": 2,
+        "categoria": "Lg",
+        "imagenes": [
+            "lg-mr15-20-funda-negra/lg-mr15-20-funda-negra-1.webp",
+            "lg-mr15-20-funda-negra/lg-mr15-20-funda-negra-2.webp",
+            "lg-mr15-20-funda-negra/lg-mr15-20-funda-negra-3.webp"
+        ],
+        "destacado": false,
+        "activo": true
+    }
+]

@@ -7,9 +7,5 @@ export default defineConfig({
     output: 'static',
     adapter: cloudflare(),
     site: 'https://octopuscontrol.com',
-    vite: {
-        ssr: {
-            external: ['node:buffer']
-        }
-    }
+
 });
