@@ -21,8 +21,8 @@
   /* Accent Colors (Marketplaces) */
   --color-wallapop: rgb(61, 210, 186);
   --color-wallapop-hover: rgb(45, 190, 166);
-  --color-vinted: rgb(0, 119, 130);
-  --color-vinted-hover: rgb(0, 95, 104);
+  --color-fewya: #5b7fff;
+  --color-fewya-hover: #4566e6;
 
   /* Neutral Colors */
   --color-white: #ffffff;
@@ -357,27 +357,27 @@ h6 {
   transform: scale(0.98);
 }
 
-/* Vinted Button */
-.btn-vinted {
-  background: var(--color-vinted);
+/* Fewya Button */
+.btn-fewya {
+  background: var(--color-fewya);
   color: #ffffff;
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.1),
-    0 4px 14px rgba(0, 119, 130, 0.3),
+    0 4px 14px rgba(91, 127, 255, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.btn-vinted:hover {
-  background: rgb(0, 135, 148);
+.btn-fewya:hover {
+  background: var(--color-fewya-hover);
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.12),
-    0 8px 24px rgba(0, 119, 130, 0.4),
+    0 8px 24px rgba(91, 127, 255, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
 }
 
-.btn-vinted:active {
-  background: rgb(0, 100, 110);
+.btn-fewya:active {
+  background: #3a55cc;
   transform: scale(0.98);
 }
 

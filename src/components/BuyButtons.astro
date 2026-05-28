@@ -5,15 +5,42 @@ interface Props {
 
 const { productTitle } = Astro.props;
 
+const fewyaUrl = `https://fewya.com/octopus-control`;
 const wallapopUrl = `https://es.wallapop.com/user/oliverm-441214038`;
-const vintedUrl = `https://www.vinted.es/member/237495534`;
 ---
 
 <div class="buy-buttons">
   <h3 class="buy-title">Compra este producto en:</h3>
-  
+
   <div class="buttons-grid">
-    <a 
+    <a
+      href={fewyaUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="buy-btn fewya"
+      aria-label={`Comprar ${productTitle} en Fewya`}
+    >
+      <span class="shipping-badge" aria-label="Envío gratis en Fewya">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/>
+          <circle cx="5.5" cy="18.5" r="2.5"/>
+          <circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+        Envío gratis
+      </span>
+      <span class="btn-icon">
+        <img src="/fewya.svg" alt="" width="28" height="28" />
+      </span>
+      <span class="btn-content">
+        <span class="btn-label">Comprar en</span>
+        <span class="btn-platform">Fewya</span>
+      </span>
+      <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+      </svg>
+    </a>
+
+    <a
       href={wallapopUrl}
       target="_blank"
       rel="noopener noreferrer"
@@ -31,27 +58,8 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
         <path d="M7 17L17 7M17 7H7M17 7v10"/>
       </svg>
     </a>
-    
-    <a 
-      href={vintedUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="buy-btn vinted"
-      aria-label={`Comprar ${productTitle} en Vinted`}
-    >
-      <span class="btn-icon">
-        <img src="/vinted.svg" alt="" width="28" height="28" />
-      </span>
-      <span class="btn-content">
-        <span class="btn-label">Comprar en</span>
-        <span class="btn-platform">Vinted</span>
-      </span>
-      <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M7 17L17 7M17 7H7M17 7v10"/>
-      </svg>
-    </a>
   </div>
-  
+
   <p class="buy-note">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="12" cy="12" r="10"/>
@@ -68,7 +76,7 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
     padding: var(--space-xl);
     border: 1px solid rgba(182, 219, 225, 0.3);
   }
-  
+
   .buy-title {
     font-family: var(--font-display);
     font-size: 1rem;
@@ -77,18 +85,18 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
     margin-bottom: var(--space-lg);
     text-align: center;
   }
-  
+
   .buttons-grid {
     display: grid;
     gap: var(--space-md);
   }
-  
+
   @media (min-width: 480px) {
     .buttons-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  
+
   .buy-btn {
     display: flex;
     align-items: center;
@@ -100,7 +108,7 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
     position: relative;
     overflow: hidden;
   }
-  
+
   .buy-btn::before {
     content: '';
     position: absolute;
@@ -108,49 +116,49 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
     opacity: 0;
     transition: opacity var(--transition-base);
   }
-  
+
   .buy-btn.wallapop {
     background: linear-gradient(135deg, var(--color-wallapop) 0%, rgb(40, 180, 160) 100%);
     color: var(--color-white);
     box-shadow: 0 4px 20px rgba(61, 210, 186, 0.35);
   }
-  
+
   .buy-btn.wallapop::before {
     background: linear-gradient(135deg, rgb(80, 230, 206) 0%, var(--color-wallapop) 100%);
   }
-  
-  .buy-btn.vinted {
-    background: linear-gradient(135deg, var(--color-vinted) 0%, rgb(0, 90, 100) 100%);
+
+  .buy-btn.fewya {
+    background: linear-gradient(135deg, var(--color-fewya) 0%, #3a55cc 100%);
     color: var(--color-white);
-    box-shadow: 0 4px 20px rgba(0, 119, 130, 0.35);
+    box-shadow: 0 4px 20px rgba(91, 127, 255, 0.35);
   }
-  
-  .buy-btn.vinted::before {
-    background: linear-gradient(135deg, rgb(0, 150, 165) 0%, var(--color-vinted) 100%);
+
+  .buy-btn.fewya::before {
+    background: linear-gradient(135deg, #7894ff 0%, var(--color-fewya) 100%);
   }
-  
+
   .buy-btn:hover {
     transform: translateY(-4px) scale(1.02);
   }
-  
+
   .buy-btn.wallapop:hover {
     box-shadow: 0 8px 30px rgba(61, 210, 186, 0.5);
   }
-  
-  .buy-btn.vinted:hover {
-    box-shadow: 0 8px 30px rgba(0, 119, 130, 0.5);
+
+  .buy-btn.fewya:hover {
+    box-shadow: 0 8px 30px rgba(91, 127, 255, 0.5);
   }
-  
+
   .buy-btn:hover::before {
     opacity: 1;
   }
-  
+
   .btn-icon {
     position: relative;
     z-index: 1;
     flex-shrink: 0;
   }
-  
+
   .btn-content {
     position: relative;
     z-index: 1;
@@ -158,19 +166,19 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
     flex-direction: column;
     flex: 1;
   }
-  
+
   .btn-label {
     font-size: 0.75rem;
     font-weight: 500;
     opacity: 0.9;
   }
-  
+
   .btn-platform {
     font-family: var(--font-display);
     font-size: 1.125rem;
     font-weight: 700;
   }
-  
+
   .btn-arrow {
     position: relative;
     z-index: 1;
@@ -178,12 +186,30 @@ const vintedUrl = `https://www.vinted.es/member/237495534`;
     transition: all var(--transition-base);
     flex-shrink: 0;
   }
-  
+
   .buy-btn:hover .btn-arrow {
     opacity: 1;
     transform: translate(3px, -3px);
   }
-  
+
+  .shipping-badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--color-fewya);
+    border-radius: var(--radius-full);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
   .buy-note {
     display: flex;
     align-items: center;

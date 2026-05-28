@@ -37,7 +37,18 @@ const footerLinks = [
       <div class="footer-platforms">
         <h3 class="footer-heading">Encuéntranos en</h3>
         <div class="platform-badges">
-          <a 
+          <a
+            href="https://fewya.com/octopus-control"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="platform-badge fewya"
+            aria-label="Ver productos en Fewya (envío gratis)"
+          >
+            <img src="/fewya.svg" alt="Fewya" class="platform-icon" />
+            <span>Fewya</span>
+            <span class="badge-tag">Envío gratis</span>
+          </a>
+          <a
             href="https://es.wallapop.com/user/oliverm-441214038"
             target="_blank"
             rel="noopener noreferrer"
@@ -46,16 +57,6 @@ const footerLinks = [
           >
             <img src="/wallapop.svg" alt="Wallapop" class="platform-icon" />
             <span>Wallapop</span>
-          </a>
-          <a 
-            href="https://www.vinted.es/member/237495534"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="platform-badge vinted"
-            aria-label="Ver productos en Vinted"
-          >
-            <img src="/vinted.svg" alt="Vinted" class="platform-icon" />
-            <span>Vinted</span>
           </a>
         </div>
       </div>
@@ -218,16 +219,26 @@ const footerLinks = [
     transform: translateY(-2px);
   }
   
-  .platform-badge.vinted {
-    background: rgba(0, 119, 130, 0.2);
-    color: rgb(100, 200, 210);
-    border: 1px solid rgba(0, 119, 130, 0.3);
+  .platform-badge.fewya {
+    background: rgba(91, 127, 255, 0.2);
+    color: #b8c7ff;
+    border: 1px solid rgba(91, 127, 255, 0.4);
   }
-  
-  .platform-badge.vinted:hover {
-    background: var(--color-vinted);
+
+  .platform-badge.fewya:hover {
+    background: var(--color-fewya);
     color: var(--color-white);
     transform: translateY(-2px);
+  }
+
+  .badge-tag {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.18);
+    color: inherit;
+    letter-spacing: 0.02em;
   }
   
   .platform-icon {
