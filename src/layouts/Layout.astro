@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   image?: string;
   type?: "website" | "product";
+  heroImage?: string;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   description = "Tu tienda de confianza de mandos a distancia verificados. Mandos de calidad al mejor precio en Octopus Control.",
   image = "/placeholder-og.jpg",
   type = "website",
+  heroImage,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -79,6 +81,21 @@ const fullTitle =
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Image CDN: preconnect so the LCP image request can start without DNS/TLS delay -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload the LCP image (product hero) so it is discovered immediately -->
+    {
+      heroImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={heroImage}
+          fetchpriority="high"
+        />
+      )
+    }
   </head>
   <body>
     <Header />

@@ -32,10 +32,11 @@ const mainImage = producto.imagenes?.[0]
 const images = producto.imagenes?.map(img => getImageUrl(img)) || [mainImage];
 ---
 
-<Layout 
+<Layout
   title={producto.titulo}
   description={producto.descripcion || `${producto.titulo} - Mando a distancia compatible con ${producto.categoria}. Disponible en Fewya y Wallapop.`}
   type="product"
+  heroImage={mainImage}
 >
   <article class="product-page">
     <div class="product-bg"></div>
@@ -62,11 +63,15 @@ const images = producto.imagenes?.map(img => getImageUrl(img)) || [mainImage];
                 Destacado
               </span>
             )}
-            <img 
-              src={mainImage} 
+            <img
+              src={mainImage}
               alt={producto.titulo}
               class="main-image"
               id="main-image"
+              width="1200"
+              height="1200"
+              fetchpriority="high"
+              decoding="async"
             />
             
             {images.length > 1 && (
@@ -104,7 +109,15 @@ const images = producto.imagenes?.map(img => getImageUrl(img)) || [mainImage];
                   data-index={index}
                   aria-label={`Ver imagen ${index + 1}`}
                 >
-                  <img src={img} alt={`${producto.titulo} - Imagen ${index + 1}`} />
+                  <img
+                    src={img}
+                    alt={`${producto.titulo} - Imagen ${index + 1}`}
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
+                  />
                 </button>
               ))}
             </div>
