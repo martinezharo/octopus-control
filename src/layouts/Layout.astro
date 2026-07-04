@@ -14,12 +14,14 @@ interface Props {
 const {
   title,
   description = "Tu tienda de confianza de mandos a distancia verificados. Mandos de calidad al mejor precio en Octopus Control.",
-  image = "/placeholder-og.jpg",
+  image = "/hero.webp",
   type = "website",
   heroImage,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// og:image must be an absolute URL; resolve relative paths against the site origin
+const socialImage = new URL(image, Astro.site).href;
 const fullTitle =
   title === "Inicio"
     ? "Octopus Control | Mandos a distancia para TV y Streaming"
@@ -59,7 +61,7 @@ const fullTitle =
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={socialImage} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Octopus Control" />
 
@@ -68,7 +70,7 @@ const fullTitle =
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={socialImage} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href="/octopus-control-icon.webp" />

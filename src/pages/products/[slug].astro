@@ -25,19 +25,44 @@ const relatedProducts = allProducts
   .filter(p => p.id !== producto.id && p.categoria === producto.categoria)
   .slice(0, 3);
 
-const mainImage = producto.imagenes?.[0] 
-  ? getImageUrl(producto.imagenes[0]) 
+const mainImage = producto.imagenes?.[0]
+  ? getImageUrl(producto.imagenes[0])
   : '/placeholder-product.svg';
 
 const images = producto.imagenes?.map(img => getImageUrl(img)) || [mainImage];
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: producto.titulo,
+  image: images,
+  sku: String(producto.id),
+  ...(producto.descripcion && { description: producto.descripcion }),
+  ...(producto.categoria && { category: producto.categoria }),
+  ...(producto.precio !== null && {
+    offers: {
+      '@type': 'Offer',
+      url: canonicalURL.href,
+      priceCurrency: 'EUR',
+      price: producto.precio,
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+    },
+  }),
+};
 ---
 
 <Layout
   title={producto.titulo}
   description={producto.descripcion || `${producto.titulo} - Mando a distancia compatible con ${producto.categoria}. Disponible en Fewya y Wallapop.`}
   type="product"
+  image={mainImage}
   heroImage={mainImage}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
   <article class="product-page">
     <div class="product-bg"></div>
     
