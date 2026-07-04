@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getProductosDestacados, getProductos } from '../lib/supabase';
+
+const destacados = await getProductosDestacados();
+const todos = await getProductos();
+const sugerencias = (destacados.length > 0 ? destacados : todos).slice(0, 3);
+---
+
+<Layout
+  title="Página no encontrada"
+  description="La página que buscas no existe o ya no está disponible. Descubre nuestro catálogo de mandos a distancia verificados."
+>
+  <section class="not-found">
+    <div class="container">
+      <p class="error-code">404</p>
+      <h1>Página no encontrada</h1>
+      <p class="error-message">
+        La página que buscas no existe o el producto ya no está disponible.
+      </p>
+      <div class="actions">
+        <a href="/products/" class="btn-primary">Ver todos los productos</a>
+        <a href="/" class="btn-secondary">Ir al inicio</a>
+      </div>
+
+      {sugerencias.length > 0 && (
+        <div class="suggestions">
+          <h2>Quizás te interese</h2>
+          <div class="grid grid-3">
+            {sugerencias.map((producto, index) => (
+              <ProductCard producto={producto} index={index} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    padding: 140px 0 var(--space-4xl);
+    text-align: center;
+    background: var(--color-gray-50);
+    min-height: calc(100vh - 80px);
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 7rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    color: var(--color-gray-900);
+    margin-top: var(--space-md);
+  }
+
+  .error-message {
+    color: var(--color-gray-600);
+    margin-top: var(--space-md);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    transition: all var(--transition-base);
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  .suggestions {
+    margin-top: var(--space-4xl);
+    text-align: left;
+  }
+
+  .suggestions h2 {
+    font-size: 1.5rem;
+    color: var(--color-gray-900);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+</style>

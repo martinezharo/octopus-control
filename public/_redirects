@@ -1,0 +1,51 @@
+# Products removed in the April 2026 static migration.
+# Same model available in another variant -> redirect to that variant;
+# otherwise -> product listing.
+
+/products/ftv-3th-gen-funda-fucsia /products/ftv-3th-gen-funda-rosa-lum/ 301
+/products/ftv-3th-gen-funda-fucsia/ /products/ftv-3th-gen-funda-rosa-lum/ 301
+/products/lg-funda-negra /products/lg-funda-azul-lum/ 301
+/products/lg-funda-negra/ /products/lg-funda-azul-lum/ 301
+/products/lg-mr15-20-funda-verde-lum /products/lg-mr15-20-funda-azul-lum/ 301
+/products/lg-mr15-20-funda-verde-lum/ /products/lg-mr15-20-funda-azul-lum/ 301
+/products/mando-bn5901259b-samsung /products/mando-blanco-bn59-01259b-samsung/ 301
+/products/mando-bn5901259b-samsung/ /products/mando-blanco-bn59-01259b-samsung/ 301
+/products/samsung-bn59-01259b-funda-negra /products/samsung-bn59-01259b-funda-azul-lum/ 301
+/products/samsung-bn59-01259b-funda-negra/ /products/samsung-bn59-01259b-funda-azul-lum/ 301
+/products/samsung-funda-verde-lum /products/samsung-bn59-01259b-funda-verde-lum/ 301
+/products/samsung-funda-verde-lum/ /products/samsung-bn59-01259b-funda-verde-lum/ 301
+/products/samsung-smtv-funda-verde-lum /products/samsung-smtv-funda-azul-lum/ 301
+/products/samsung-smtv-funda-verde-lum/ /products/samsung-smtv-funda-azul-lum/ 301
+
+/products/mando-a-distancia-compatible-sony-rm-ed052 /products/ 301
+/products/mando-a-distancia-compatible-sony-rm-ed052/ /products/ 301
+/products/mando-aa59-00602a-samsung /products/ 301
+/products/mando-aa59-00602a-samsung/ /products/ 301
+/products/mando-akb73715603-lg /products/ 301
+/products/mando-akb73715603-lg/ /products/ 301
+/products/mando-bn59-01199f-samsung /products/ 301
+/products/mando-bn59-01199f-samsung/ /products/ 301
+/products/mando-bn59-01199g-samsung /products/ 301
+/products/mando-bn59-01199g-samsung/ /products/ 301
+/products/mando-bn59-01301a-samsung /products/ 301
+/products/mando-bn59-01301a-samsung/ /products/ 301
+/products/mando-chiq-gcbltv02adbbt /products/ 301
+/products/mando-chiq-gcbltv02adbbt/ /products/ 301
+/products/mando-jvc-rm-c3338 /products/ 301
+/products/mando-jvc-rm-c3338/ /products/ 301
+/products/mando-lg-akb75095308 /products/ 301
+/products/mando-lg-akb75095308/ /products/ 301
+/products/mando-lg-akb75375604 /products/ 301
+/products/mando-lg-akb75375604/ /products/ 301
+/products/mando-lg-akb76037601 /products/ 301
+/products/mando-lg-akb76037601/ /products/ 301
+/products/mando-lg-mr500g /products/ 301
+/products/mando-lg-mr500g/ /products/ 301
+/products/mando-samsung-bn59-01014a /products/ 301
+/products/mando-samsung-bn59-01014a/ /products/ 301
+/products/mando-sony-rm-ed054 /products/ 301
+/products/mando-sony-rm-ed054/ /products/ 301
+/products/mando-sony-rmt-tx200e /products/ 301
+/products/mando-sony-rmt-tx200e/ /products/ 301
+/products/panasonic-n2qayb000572 /products/ 301
+/products/panasonic-n2qayb000572/ /products/ 301
