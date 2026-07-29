@@ -2,25 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import FilterPanel from '../../components/FilterPanel.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { getProductos, getCategorias } from '../../lib/supabase';
+import { getProductos, getCategorias, isBuyable } from '../../lib/catalog';
 
-const productos = await getProductos();
+// Already ordered by availability then featured then title by the catalog layer.
+const sortedProducts = await getProductos();
 const categorias = await getCategorias();
 
-// Default sort: Featured first (A-Z), others later (Z-A)
-const sortedProducts = [...productos].sort((a, b) => {
-  if (a.destacado !== b.destacado) {
-    return (b.destacado ? 1 : 0) - (a.destacado ? 1 : 0);
-  }
-  
-  if (a.destacado) {
-    // Featured products: A-Z
-    return a.titulo.localeCompare(b.titulo, 'es');
-  } else {
-    // Non-featured products: Z-A
-    return b.titulo.localeCompare(a.titulo, 'es');
-  }
-});
+const disponibles = sortedProducts.filter(p => isBuyable(p.availability));
+const noDisponibles = sortedProducts.length - disponibles.length;
 ---
 
 <Layout 
@@ -48,23 +37,27 @@ const sortedProducts = [...productos].sort((a, b) => {
         </p>
         
         <div class="products-count animate-fadeIn delay-200">
-          <span id="visible-count">{productos.length}</span> productos disponibles
+          <span id="visible-count">{sortedProducts.length}</span> <span id="visible-noun">productos</span>
+          {noDisponibles > 0 && (
+            <span class="count-detail">· {disponibles.length} en stock</span>
+          )}
         </div>
       </header>
-      
+
       <!-- Filter Panel -->
-      <FilterPanel categorias={categorias} />
+      <FilterPanel categorias={categorias} unavailableCount={noDisponibles} />
       
       <!-- Products Grid -->
       {sortedProducts.length > 0 ? (
         <div class="products-grid grid grid-3" id="product-grid">
           {sortedProducts.map((producto, index) => (
-            <div 
-              class="product-card-wrapper" 
+            <div
+              class="product-card-wrapper"
               data-category={producto.categoria || ''}
               data-price={producto.precio || 0}
               data-title={producto.titulo}
               data-featured={producto.destacado}
+              data-available={isBuyable(producto.availability)}
             >
               <ProductCard producto={producto} index={index} />
             </div>
@@ -179,6 +172,11 @@ const sortedProducts = [...productos].sort((a, b) => {
   .products-count span {
     font-weight: 700;
     color: var(--color-primary);
+  }
+
+  .products-count .count-detail {
+    font-weight: 500;
+    color: var(--color-gray-500);
   }
   
   /* Products Grid */

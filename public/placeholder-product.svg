@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Imagen no disponible">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4eaee"/>
+      <stop offset="100%" stop-color="#B6DBE1"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <g fill="none" stroke="#033746" stroke-opacity="0.35" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="152" y="96" width="96" height="208" rx="30"/>
+    <circle cx="200" cy="140" r="14"/>
+    <path d="M176 190h48M176 222h48M176 254h48"/>
+  </g>
+  <text x="200" y="356" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="20" font-weight="600" fill="#033746" fill-opacity="0.5">
+    Imagen no disponible
+  </text>
+</svg>

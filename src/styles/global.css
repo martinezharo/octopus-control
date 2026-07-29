@@ -18,9 +18,7 @@
   --color-secondary-light: #d4eaee;
   --color-secondary-dark: #8fc5cf;
 
-  /* Accent Colors (Marketplaces) */
-  --color-wallapop: rgb(61, 210, 186);
-  --color-wallapop-hover: rgb(45, 190, 166);
+  /* Accent Colors (Marketplace) */
   --color-fewya: #5b7fff;
   --color-fewya-hover: #4566e6;
 
@@ -330,30 +328,6 @@ h6 {
 
 .btn-secondary:active {
   background: var(--color-primary-dark);
-  transform: scale(0.98);
-}
-
-/* Wallapop Button */
-.btn-wallapop {
-  background: var(--color-wallapop);
-  color: #ffffff;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.1),
-    0 4px 14px rgba(61, 210, 186, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-
-.btn-wallapop:hover {
-  background: rgb(70, 220, 195);
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.12),
-    0 8px 24px rgba(61, 210, 186, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-.btn-wallapop:active {
-  background: rgb(50, 190, 166);
   transform: scale(0.98);
 }
 

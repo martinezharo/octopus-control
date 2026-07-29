@@ -1,5 +1,5 @@
 ---
-import { getImageUrl, formatPrice, type Producto } from '../lib/supabase';
+import { AVAILABILITY, getImageUrl, formatPrice, isBuyable, type Producto } from '../lib/catalog';
 
 interface Props {
   producto: Producto;
@@ -7,42 +7,58 @@ interface Props {
 }
 
 const { producto, index = 0 } = Astro.props;
-const imageUrl = producto.imagenes?.[0] 
-  ? getImageUrl(producto.imagenes[0]) 
+const imageUrl = producto.imagenes?.[0]
+  ? getImageUrl(producto.imagenes[0])
   : '/placeholder-product.svg';
+
+const buyable = isBuyable(producto.availability);
+
+const UNAVAILABLE_LABEL = {
+  [AVAILABILITY.OUT_OF_STOCK]: 'Agotado',
+  [AVAILABILITY.UNLISTED]: 'No disponible',
+  [AVAILABILITY.ARCHIVED]: 'Descatalogado',
+} as const;
+
+const unavailableLabel = buyable
+  ? null
+  : UNAVAILABLE_LABEL[producto.availability as keyof typeof UNAVAILABLE_LABEL];
 ---
 
-<article 
-  class="product-card"
+<article
+  class:list={['product-card', { 'is-unavailable': !buyable }]}
   style={`animation-delay: ${index * 100}ms`}
 >
   <a href={`/products/${producto.slug}/`} class="product-link">
     <div class="product-image">
-      <img 
-        src={imageUrl} 
+      <img
+        src={imageUrl}
         alt={producto.titulo}
         loading="lazy"
         decoding="async"
       />
-      {producto.destacado && (
-        <span class="badge-featured">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+      {producto.destacado && buyable && (
+        <span class="badge badge-featured">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
           </svg>
           Destacado
         </span>
       )}
+      {unavailableLabel && <span class="badge badge-unavailable">{unavailableLabel}</span>}
       <div class="product-overlay">
         <span class="view-btn">Ver producto</span>
       </div>
     </div>
-    
+
     <div class="product-info">
       {producto.categoria && (
         <span class="product-category">{producto.categoria}</span>
       )}
       <h3 class="product-title">{producto.titulo}</h3>
-      <p class="product-price">{formatPrice(producto.precio)}</p>
+      <p class="product-price">
+        {producto.precio !== null ? formatPrice(producto.precio) : 'Consultar'}
+        {!buyable && <span class="price-note">{unavailableLabel}</span>}
+      </p>
     </div>
   </a>
 </article>
@@ -86,7 +102,7 @@ const imageUrl = producto.imagenes?.[0]
     transform: scale(1.08);
   }
   
-  .badge-featured {
+  .badge {
     position: absolute;
     top: var(--space-md);
     left: var(--space-md);
@@ -94,15 +110,45 @@ const imageUrl = producto.imagenes?.[0]
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-sm);
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    color: var(--color-white);
     font-size: 0.75rem;
     font-weight: 600;
     border-radius: var(--radius-full);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
     z-index: 10;
+  }
+
+  .badge-featured {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: var(--color-white);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+  }
+
+  .badge-unavailable {
+    background: rgba(17, 24, 39, 0.82);
+    color: var(--color-white);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Unavailable products stay in the grid and stay clickable — their pages hold
+     the search history. They are just visually de-emphasised. */
+  .product-card.is-unavailable .product-image img {
+    filter: grayscale(0.7);
+    opacity: 0.75;
+  }
+
+  .product-card.is-unavailable .product-price {
+    color: var(--color-gray-500);
+  }
+
+  .price-note {
+    margin-left: var(--space-sm);
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-gray-400);
   }
   
   .product-overlay {

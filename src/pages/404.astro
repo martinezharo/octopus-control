@@ -1,11 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { getProductosDestacados, getProductos } from '../lib/supabase';
+import { getProductosDestacados } from '../lib/catalog';
 
-const destacados = await getProductosDestacados();
-const todos = await getProductos();
-const sugerencias = (destacados.length > 0 ? destacados : todos).slice(0, 3);
+const sugerencias = await getProductosDestacados(3);
 ---
 
 <Layout

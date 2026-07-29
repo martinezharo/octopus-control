@@ -6,9 +6,11 @@ interface Props {
   ctaHref?: string;
 }
 
+import { shopUrl } from '../lib/catalog';
+
 const {
   title = 'Mandos a distancia de calidad al mejor precio',
-  subtitle = 'Descubre nuestra selección de controles remotos. Compra con confianza en plataformas seguras.',
+  subtitle = 'Descubre nuestra selección de controles remotos. Compra con confianza y envío gratis en Fewya.',
   ctaText = 'Ver Catálogo',
   ctaHref = '/products/'
 } = Astro.props;
@@ -64,27 +66,17 @@ const {
       </div>
 
       <div class="hero-platforms animate-fadeInUp delay-400">
-        <span class="platforms-label">Disponible en:</span>
-        <div class="platforms-icons">
-          <a
-            href="https://fewya.com/octopus-control"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="platform-icon fewya"
-            aria-label="Fewya (envío gratis)"
-          >
-            <img src="/fewya.svg" alt="Fewya" class="platform-img" />
-          </a>
-          <a
-            href="https://es.wallapop.com/user/oliverm-441214038"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="platform-icon wallapop"
-            aria-label="Wallapop"
-          >
-            <img src="/wallapop.svg" alt="Wallapop" class="platform-img" />
-          </a>
-        </div>
+        <span class="platforms-label">Compra en:</span>
+        <a
+          href={shopUrl}
+          target="_blank"
+          rel="noopener"
+          class="platform-icon fewya"
+          aria-label="Nuestra tienda en Fewya, con envío gratis"
+        >
+          <img src="/fewya.svg" alt="" class="platform-img" aria-hidden="true" />
+          <span>Fewya</span>
+        </a>
       </div>
     </div>
   </div>
@@ -205,42 +197,40 @@ const {
     color: rgba(255, 255, 255, 0.6);
   }
   
-  .platforms-icons {
-    display: flex;
-    gap: var(--space-sm);
-  }
-  
   .platform-icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
+    gap: var(--space-sm);
+    padding: 7px 14px 7px 10px;
     border-radius: var(--radius-full);
-    transition: all var(--transition-base);
-    padding: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-white);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
-  
-  .platform-icon.wallapop {
-    background: var(--color-wallapop);
-    box-shadow: 0 4px 12px rgba(61, 210, 186, 0.4);
+
+  .platform-icon .platform-img {
+    width: 20px;
+    height: 20px;
   }
-  
+
   .platform-icon.fewya {
     background: var(--color-fewya);
     box-shadow: 0 4px 12px rgba(91, 127, 255, 0.4);
   }
 
-  .platform-icon:hover {
-    transform: scale(1.1);
-  }
-
-  .platform-icon.wallapop:hover {
-    box-shadow: 0 6px 20px rgba(61, 210, 186, 0.6);
-  }
-
   .platform-icon.fewya:hover {
-    box-shadow: 0 6px 20px rgba(91, 127, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(91, 127, 255, 0.6);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .platform-icon {
+      transition: none;
+    }
+    .platform-icon:hover {
+      transform: none;
+    }
   }
 
   .hero-shipping {

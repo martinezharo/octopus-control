@@ -45,12 +45,27 @@ To work on this project, you will need:
     pnpm install
     ```
 
-3.  No environment variables are required! The project uses static JSON data located in `src/data/productos.json`.
+3.  No environment variables are required. The catalog is mirrored from the Fewya
+    shop at build time, and `FEWYA_BASE_URL` / `FEWYA_SHOP_SLUG` already default to
+    production. Set them only to build against a Fewya preview deployment.
+
+    If the feed cannot be reached, the build falls back to the committed cache and
+    then to the frozen snapshot, so it always succeeds — check the `[catalog]`
+    lines in the build output to see which source was used.
 
 4.  Start the development server:
     ```bash
     pnpm dev
     ```
+
+## Catalog and URLs
+
+Product URLs are **permanent**. `src/data/catalog-registry.json` owns the URL
+space, and slugs are never taken from Fewya — see `docs/catalog-sync.md` before
+touching anything under `src/lib/catalog/`.
+
+Run `pnpm test` after changing the matcher: the suite checks every real product
+slug against a simulated Fewya catalog.
 
 ## Coding Style
 

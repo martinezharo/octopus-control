@@ -2,15 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { getProductosDestacados, getProductos } from '../lib/supabase';
+import { getProductosDestacados } from '../lib/catalog';
 
-const productosDestacados = await getProductosDestacados();
-const todosProductos = await getProductos();
-
-// Show featured products first, or first 6 products if no featured
-const productosToShow = productosDestacados.length > 0 
-  ? productosDestacados.slice(0, 6) 
-  : todosProductos.slice(0, 6);
+// Only buyable products reach the homepage: it is a shop window, not an archive.
+const productosToShow = await getProductosDestacados(6);
 ---
 
 <Layout title="Inicio">
@@ -31,7 +26,7 @@ const productosToShow = productosDestacados.length > 0
           <span class="highlight">Los más vendidos</span>
         </h2>
         <p class="section-description animate-fadeInUp delay-100">
-          Descubre nuestra selección de mandos más vendidos en Fewya y Wallapop durante los últimos meses.
+          Nuestros mandos más vendidos, con stock actualizado directamente desde nuestra tienda en Fewya.
         </p>
       </header>
       
@@ -87,7 +82,7 @@ const productosToShow = productosDestacados.length > 0
           </div>
           <h3 class="feature-title">Plataformas Seguras</h3>
           <p class="feature-description">
-            Compra a través de Fewya y Wallapop con total seguridad y protección.
+            Compra a través de Fewya con pago protegido y seguimiento del envío.
           </p>
         </div>
         

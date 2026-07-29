@@ -1,0 +1,36 @@
+{
+  "_readme": [
+    "Registro de URLs de octopuscontrol.com. Este fichero manda sobre el espacio de URLs.",
+    "",
+    "overrides: fija a mano la correspondencia slug-de-esta-web -> slug-en-fewya.",
+    "  Úsalo cuando el emparejamiento automático falle o se equivoque. Tiene",
+    "  prioridad sobre cualquier heurística. Ejecuta `pnpm sync:catalog` para ver",
+    "  qué productos se han quedado sin pareja.",
+    "",
+    "retired: productos que ya no se venden. Su URL SIGUE VIVA y devuelve 200 con",
+    "  la ficha marcada como descatalogada y enlaces a alternativas. No borres",
+    "  entradas de aquí: si algún día vuelves a subir el modelo a Fewya, quita la",
+    "  entrada de `retired` y el emparejamiento automático lo reactivará sobre la",
+    "  MISMA URL, conservando su historial en Google."
+  ],
+  "shop": "octopus-control",
+  "overrides": {},
+  "retired": [
+    { "slug": "mando-a-distancia-compatible-sony-rm-ed052", "titulo": "Mando Sony RM-ED052", "categoria": "Sony" },
+    { "slug": "mando-aa59-00602a-samsung", "titulo": "Mando Samsung AA59-00602A", "categoria": "Samsung" },
+    { "slug": "mando-akb73715603-lg", "titulo": "Mando LG AKB73715603", "categoria": "LG" },
+    { "slug": "mando-bn59-01199f-samsung", "titulo": "Mando Samsung BN59-01199F", "categoria": "Samsung" },
+    { "slug": "mando-bn59-01199g-samsung", "titulo": "Mando Samsung BN59-01199G", "categoria": "Samsung" },
+    { "slug": "mando-bn59-01301a-samsung", "titulo": "Mando Samsung BN59-01301A", "categoria": "Samsung" },
+    { "slug": "mando-chiq-gcbltv02adbbt", "titulo": "Mando CHiQ GCBLTV02ADBBT", "categoria": "CHiQ" },
+    { "slug": "mando-jvc-rm-c3338", "titulo": "Mando JVC RM-C3338", "categoria": "JVC" },
+    { "slug": "mando-lg-akb75095308", "titulo": "Mando LG AKB75095308", "categoria": "LG" },
+    { "slug": "mando-lg-akb75375604", "titulo": "Mando LG AKB75375604", "categoria": "LG" },
+    { "slug": "mando-lg-akb76037601", "titulo": "Mando LG AKB76037601", "categoria": "LG" },
+    { "slug": "mando-lg-mr500g", "titulo": "Mando LG MR500G", "categoria": "LG" },
+    { "slug": "mando-samsung-bn59-01014a", "titulo": "Mando Samsung BN59-01014A", "categoria": "Samsung" },
+    { "slug": "mando-sony-rm-ed054", "titulo": "Mando Sony RM-ED054", "categoria": "Sony" },
+    { "slug": "mando-sony-rmt-tx200e", "titulo": "Mando Sony RMT-TX200E", "categoria": "Sony" },
+    { "slug": "panasonic-n2qayb000572", "titulo": "Mando Panasonic N2QAYB000572", "categoria": "Panasonic" }
+  ]
+}
