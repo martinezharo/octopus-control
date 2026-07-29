@@ -58,7 +58,33 @@ en Fewya no puede dejar esta web sin catálogo.
 | `unlisted` | Desapareció del feed | Ficha viva con el contenido antiguo | `OutOfStock` |
 | `archived` | Retirado a propósito (registro) | Ficha viva marcada como descatalogada | `Discontinued` |
 
-Los cuatro devuelven **200 y son indexables**. Ninguno redirige al listado.
+Los cuatro devuelven **200**. Ninguno redirige al listado.
+
+### Por qué `archived` no se muestra ni se indexa
+
+Los tres primeros estados se navegan y se indexan con normalidad. `archived` es la
+excepción: **no sale en el listado, ni en la home, ni en los relacionados, ni en el
+filtro de categorías, y lleva `noindex, follow` y queda fuera del sitemap.**
+
+El motivo no es el estado en sí, sino el contenido que tienen esas fichas. La
+migración de abril de 2026 exportó `productos.json` filtrando por `activo`, así que
+las filas que ya estaban inactivas en Supabase nunca llegaron al JSON: de ellas sólo
+se pudo reconstruir el título y la marca a partir del slug. Lo que queda es un
+cascarón sin descripción, sin precio y con imagen de relleno. Quince fichas casi
+idénticas entre sí es *thin content*, y pedirle a Google que las indexe juega en
+contra del resto del catálogo.
+
+Mantener la URL viva y decirle a Google que la ignore es lo que separa esto de un
+404: **no rompe ningún enlace entrante y es reversible**. Si algún día se recupera
+el contenido original (puede seguir en el proyecto de Supabase retirado), basta con
+quitar la exclusión en `isIndexable` (`src/lib/catalog/types.ts`) y las URLs vuelven
+a indexarse con su historial intacto, sin haber pasado nunca por un 404 ni por una
+redirección.
+
+Ojo con la alternativa que **no** hay que tomar: redirigir un descatalogado a un
+modelo "parecido". El propio matcher se niega a emparejar dos modelos que sólo
+comparten el prefijo de familia (`AA59-00602A` y `AA59-00582A`), y un 301 entre
+ellos afirmaría una compatibilidad que no tenemos datos para sostener.
 
 ## Emparejamiento de slugs
 
@@ -108,8 +134,13 @@ Si es un error, fíjalo a mano en `src/data/catalog-registry.json`:
 1. Desactívalo o bórralo en Fewya.
 2. Añádelo a `retired` en `src/data/catalog-registry.json`, con su slug **exacto**.
 
-La URL sigue publicada como descatalogada, enlazando a alternativas en stock.
+La URL sigue publicada (200) con la ficha marcada como descatalogada y enlazando a
+alternativas en stock, pero deja de aparecer en el catálogo y se marca `noindex`.
 **Nunca borres una entrada de `retired`** salvo para volver a venderlo.
+
+Un producto que aún tenga descripción, precio e imágenes propias no necesita entrar
+aquí: si simplemente lo desactivas en Fewya pasa a `unlisted`, que sigue navegable e
+indexable con su contenido. `retired` es para lo que ya no vuelve.
 
 ### Volver a vender un modelo retirado
 

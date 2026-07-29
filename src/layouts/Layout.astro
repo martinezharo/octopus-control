@@ -9,6 +9,8 @@ interface Props {
   image?: string;
   type?: "website" | "product";
   heroImage?: string;
+  /** Keep the page out of the index while still serving it at 200. */
+  noindex?: boolean;
 }
 
 const {
@@ -17,6 +19,7 @@ const {
   image = "/hero.webp",
   type = "website",
   heroImage,
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -52,6 +55,9 @@ const fullTitle =
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {/* `follow` on purpose: the page is not worth indexing, but the links it
+        carries to products in stock are still worth crawling. */}
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Open Graph / Facebook -->
     <meta

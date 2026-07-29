@@ -1,9 +1,12 @@
 /**
  * Availability states a product page can be in.
  *
- * Every state renders a real, indexable page. A URL that has ever been
+ * Every state renders a real page returning 200. A URL that has ever been
  * published is never deleted and never 301s to a listing — that is what cost
  * this site its rankings in the April 2026 migration.
+ *
+ * `ARCHIVED` is the one state that is neither browsable nor indexable: see
+ * `isBrowsable` and `isIndexable` below for why.
  */
 export const AVAILABILITY = {
     /** Mirrored from Fewya, units left. Buyable. */
@@ -26,6 +29,38 @@ export function isBuyable(availability: Availability): boolean {
 /** True when the product is mirrored from Fewya (in stock or not). */
 export function isSynced(availability: Availability): boolean {
     return availability === AVAILABILITY.IN_STOCK || availability === AVAILABILITY.OUT_OF_STOCK;
+}
+
+/**
+ * True when the product belongs in the site's browsing surfaces: the listing
+ * grid, the category filter, related products, the homepage.
+ *
+ * Retired products are excluded. Their content did not survive the April 2026
+ * migration — the snapshot was exported filtering on `activo`, so the rows that
+ * were already inactive never made it into `productos.json` and only the title
+ * and brand could be reconstructed from the slug. What is left is a shell with
+ * no description, no price and a placeholder image, which is worth nothing to
+ * someone browsing the shop.
+ */
+export function isBrowsable(availability: Availability): boolean {
+    return availability !== AVAILABILITY.ARCHIVED;
+}
+
+/**
+ * True when the page should be offered to search engines.
+ *
+ * Retired pages stay at 200 so no inbound link breaks, but they are marked
+ * `noindex` and kept out of the sitemap: sixteen near-identical shells with no
+ * content of their own are thin content, and asking Google to index them works
+ * against the rest of the catalog.
+ *
+ * This is deliberately reversible. Recovering the original descriptions and
+ * images (they may still exist in the retired Supabase project) is enough to
+ * make these pages worth indexing again — drop the exclusion here and the URLs
+ * come back with their history intact, having never returned a 404.
+ */
+export function isIndexable(availability: Availability): boolean {
+    return availability !== AVAILABILITY.ARCHIVED;
 }
 
 /** schema.org availability URL for the product's state. */

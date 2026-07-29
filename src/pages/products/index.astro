@@ -2,10 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import FilterPanel from '../../components/FilterPanel.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { getProductos, getCategorias, isBuyable } from '../../lib/catalog';
+import { getProductosVisibles, getCategorias, isBuyable } from '../../lib/catalog';
 
 // Already ordered by availability then featured then title by the catalog layer.
-const sortedProducts = await getProductos();
+// Retired products are left out: their pages stay live for the URLs, but they
+// have no content to show anyone browsing the catalog.
+const sortedProducts = await getProductosVisibles();
 const categorias = await getCategorias();
 
 const disponibles = sortedProducts.filter(p => isBuyable(p.availability));
