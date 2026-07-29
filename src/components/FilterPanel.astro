@@ -1,9 +1,11 @@
 ---
 interface Props {
   categorias: string[];
+  /** Products shown but not buyable right now. Hides the toggle when zero. */
+  unavailableCount?: number;
 }
 
-const { categorias } = Astro.props;
+const { categorias, unavailableCount = 0 } = Astro.props;
 ---
 
 <div class="filter-panel glass-card" id="filter-panel">
@@ -119,6 +121,25 @@ const { categorias } = Astro.props;
           </button>
         </div>
       </div>
+
+      {unavailableCount > 0 && (
+        <div class="filter-section availability-section">
+          <h4 class="filter-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 7h-9M14 17H5M17 14l3 3-3 3M7 10L4 7l3-3"/>
+            </svg>
+            Disponibilidad
+          </h4>
+          <label class="availability-toggle">
+            <input type="checkbox" id="only-available" />
+            <span class="switch" aria-hidden="true"></span>
+            <span class="availability-text">
+              Solo productos en stock
+              <span class="availability-hint">Ocultar {unavailableCount} sin stock o descatalogados</span>
+            </span>
+          </label>
+        </div>
+      )}
     </div>
   </div>
 </div>
@@ -292,7 +313,86 @@ const { categorias } = Astro.props;
   .sort-section {
     padding-top: var(--space-md);
   }
-  
+
+  .availability-section {
+    padding-top: var(--space-md);
+    margin-top: var(--space-md);
+    border-top: 1px solid rgba(3, 55, 70, 0.06);
+  }
+
+  .availability-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    cursor: pointer;
+    padding: var(--space-sm) 0;
+  }
+
+  .availability-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 42px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    background: var(--color-gray-300);
+    transition: background var(--transition-base);
+  }
+
+  .switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-white);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    transition: transform var(--transition-base);
+  }
+
+  .availability-toggle input:checked + .switch {
+    background: var(--color-primary);
+  }
+
+  .availability-toggle input:checked + .switch::after {
+    transform: translateX(18px);
+  }
+
+  .availability-toggle input:focus-visible + .switch {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .availability-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-gray-700);
+  }
+
+  .availability-hint {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-gray-500);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .switch,
+    .switch::after {
+      transition: none;
+    }
+  }
+
   .section-header {
     display: flex;
     align-items: center;
@@ -701,8 +801,11 @@ const { categorias } = Astro.props;
     
     if (!productGrid) return;
     
+    const onlyAvailableToggle = document.getElementById('only-available') as HTMLInputElement | null;
+
     let currentCategory = 'all';
     let currentSort = 'default';
+    let onlyAvailable = false;
     
     // Toggle logic
     toggleBtn?.addEventListener('click', () => {
@@ -845,8 +948,9 @@ const { categorias } = Astro.props;
       products.forEach(product => {
         const category = product.dataset.category || '';
         const matchesCategory = currentCategory === 'all' || category === currentCategory;
-        
-        if (matchesCategory) {
+        const matchesAvailability = !onlyAvailable || product.dataset.available === 'true';
+
+        if (matchesCategory && matchesAvailability) {
           product.style.display = '';
           product.style.animationDelay = `${visibleIndex * 0.05}s`;
           visibleIndex++;
@@ -863,19 +967,22 @@ const { categorias } = Astro.props;
         const priceB = parseFloat(b.dataset.price || '0');
         const featuredA = a.dataset.featured === 'true' ? 1 : 0;
         const featuredB = b.dataset.featured === 'true' ? 1 : 0;
-        
+        const availableA = a.dataset.available === 'true' ? 1 : 0;
+        const availableB = b.dataset.available === 'true' ? 1 : 0;
+        const titleA = a.dataset.title || '';
+        const titleB = b.dataset.title || '';
+
+        // Whatever the chosen sort, never lead with something nobody can buy.
+        if (availableA !== availableB) return availableB - availableA;
+
         switch (currentSort) {
           case 'price-asc':
             return priceA - priceB;
           case 'price-desc':
             return priceB - priceA;
-          default: // Featured first (A-Z), then non-featured (Z-A)
+          default:
             if (featuredA !== featuredB) return featuredB - featuredA;
-            if (featuredA) {
-              return titleA.localeCompare(titleB, 'es');
-            } else {
-              return titleB.localeCompare(titleA, 'es');
-            }
+            return titleA.localeCompare(titleB, 'es');
         }
       });
       
@@ -902,17 +1009,25 @@ const { categorias } = Astro.props;
       });
     });
     
+    // Availability handler
+    onlyAvailableToggle?.addEventListener('change', () => {
+      onlyAvailable = onlyAvailableToggle.checked;
+      updateProducts();
+    });
+
     // Reset handler
     resetBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
       categoryPills.forEach(p => p.classList.remove('active'));
       categoryPills[0]?.classList.add('active');
-      
+
       sortButtons.forEach(b => b.classList.remove('active'));
       sortButtons[0]?.classList.add('active');
-      
+
       currentCategory = 'all';
       currentSort = 'default';
+      onlyAvailable = false;
+      if (onlyAvailableToggle) onlyAvailableToggle.checked = false;
       
       // Scroll back to start
       if (categoryPillsContainer) {

@@ -1,62 +1,70 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import BuyButtons from '../../components/BuyButtons.astro';
+import BuyCta from '../../components/BuyCta.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { getProductoBySlug, getProductos, getImageUrl, formatPrice } from '../../lib/supabase';
+import { AVAILABILITY, getProductoBySlug, getProductos, getRelacionados, getImageUrl, isBuyable, schemaAvailability, type Producto } from '../../lib/catalog';
 
 export async function getStaticPaths() {
   const productos = await getProductos();
-  
+
+  // Every product gets a page, whatever its availability: a URL that has been
+  // indexed keeps returning 200 even when the product is gone.
   return productos.map((producto) => ({
     params: { slug: producto.slug },
     props: { producto },
   }));
 }
 
-const { producto } = Astro.props;
+const { producto } = Astro.props as { producto: Producto };
 
 if (!producto) {
   return Astro.redirect('/products/');
 }
 
-// Get related products (same category, excluding current)
-const allProducts = await getProductos();
-const relatedProducts = allProducts
-  .filter(p => p.id !== producto.id && p.categoria === producto.categoria)
-  .slice(0, 3);
+const relatedProducts = await getRelacionados(producto, 3);
+const buyable = isBuyable(producto.availability);
+const isArchived = producto.availability === AVAILABILITY.ARCHIVED;
 
 const mainImage = producto.imagenes?.[0]
   ? getImageUrl(producto.imagenes[0])
   : '/placeholder-product.svg';
 
-const images = producto.imagenes?.map(img => getImageUrl(img)) || [mainImage];
+const images = producto.imagenes?.length ? producto.imagenes.map(img => getImageUrl(img)) : [mainImage];
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
+// The offer points at the Fewya listing, which is where the purchase actually
+// happens. Declaring an offer on a URL that cannot take payment — and hardcoding
+// InStock — is what got the rich results dropped.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: producto.titulo,
   image: images,
   sku: String(producto.id),
+  url: canonicalURL.href,
   ...(producto.descripcion && { description: producto.descripcion }),
-  ...(producto.categoria && { category: producto.categoria }),
+  ...(producto.categoria && { brand: { '@type': 'Brand', name: producto.categoria } }),
   ...(producto.precio !== null && {
     offers: {
       '@type': 'Offer',
-      url: canonicalURL.href,
+      url: producto.fewyaUrl,
       priceCurrency: 'EUR',
-      price: producto.precio,
-      availability: 'https://schema.org/InStock',
+      price: producto.precio.toFixed(2),
+      availability: schemaAvailability(producto.availability),
       itemCondition: 'https://schema.org/NewCondition',
+      seller: { '@type': 'Organization', name: 'Octopus Control' },
     },
   }),
 };
+
+const metaDescription = producto.descripcion
+  || `${producto.titulo}${producto.categoria ? ` — mando a distancia compatible con ${producto.categoria}` : ''}. ${buyable ? 'Disponible en Fewya con envío gratis.' : 'Consulta alternativas disponibles.'}`;
 ---
 
 <Layout
   title={producto.titulo}
-  description={producto.descripcion || `${producto.titulo} - Mando a distancia compatible con ${producto.categoria}. Disponible en Fewya y Wallapop.`}
+  description={metaDescription}
   type="product"
   image={mainImage}
   heroImage={mainImage}
@@ -156,14 +164,14 @@ const jsonLd = {
           )}
           
           <h1 class="product-title">{producto.titulo}</h1>
-          
-          <div class="product-price">
-            {formatPrice(producto.precio)}
-          </div>
-          
-          <!-- Buy Buttons -->
-          <BuyButtons productTitle={producto.titulo} />
-          
+
+          <BuyCta
+            titulo={producto.titulo}
+            precio={producto.precio}
+            availability={producto.availability}
+            fewyaUrl={producto.fewyaUrl}
+          />
+
           {producto.descripcion && (
             <div class="product-description">
               <h2 class="description-title">Descripción</h2>
@@ -202,8 +210,17 @@ const jsonLd = {
       
       <!-- Related Products -->
       {relatedProducts.length > 0 && (
-        <section class="related-section">
-          <h2 class="related-title">Productos Relacionados</h2>
+        <section class="related-section" id="alternativas">
+          <h2 class="related-title">
+            {buyable ? 'Productos relacionados' : 'Alternativas disponibles'}
+          </h2>
+          {!buyable && (
+            <p class="related-intro">
+              {isArchived
+                ? 'Este modelo ya no está en catálogo. Estos mandos sí están disponibles ahora mismo:'
+                : 'Mientras repones este modelo, estos están disponibles ahora mismo:'}
+            </p>
+          )}
           <div class="related-grid grid grid-3">
             {relatedProducts.map((product, index) => (
               <ProductCard producto={product} index={index} />
@@ -532,8 +549,20 @@ const jsonLd = {
   .related-title {
     font-size: 1.5rem;
     color: var(--color-gray-900);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
     text-align: center;
+  }
+
+  .related-intro {
+    max-width: 560px;
+    margin: 0 auto var(--space-xl);
+    text-align: center;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+  }
+
+  .related-section:not(:has(.related-intro)) .related-title {
+    margin-bottom: var(--space-xl);
   }
 </style>
 
