@@ -6,8 +6,6 @@ interface Props {
   ctaHref?: string;
 }
 
-import { shopUrl } from '../lib/catalog';
-
 const {
   title = 'Mandos a distancia de calidad al mejor precio',
   subtitle = 'Descubre nuestra selección de controles remotos. Compra con confianza y envío gratis en Fewya.',
@@ -63,20 +61,6 @@ const {
           <circle cx="18.5" cy="18.5" r="2.5"/>
         </svg>
         <span>Envío <strong>gratis</strong> al comprar en Fewya</span>
-      </div>
-
-      <div class="hero-platforms animate-fadeInUp delay-400">
-        <span class="platforms-label">Compra en:</span>
-        <a
-          href={shopUrl}
-          target="_blank"
-          rel="noopener"
-          class="platform-icon fewya"
-          aria-label="Nuestra tienda en Fewya, con envío gratis"
-        >
-          <img src="/fewya.svg" alt="" class="platform-img" aria-hidden="true" />
-          <span>Fewya</span>
-        </a>
       </div>
     </div>
   </div>
@@ -186,53 +170,6 @@ const {
     margin-bottom: var(--space-2xl);
   }
   
-  .hero-platforms {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-  }
-  
-  .platforms-label {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  .platform-icon {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: 7px 14px 7px 10px;
-    border-radius: var(--radius-full);
-    font-weight: 600;
-    font-size: 0.875rem;
-    color: var(--color-white);
-    transition: transform var(--transition-base), box-shadow var(--transition-base);
-  }
-
-  .platform-icon .platform-img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .platform-icon.fewya {
-    background: var(--color-fewya);
-    box-shadow: 0 4px 12px rgba(91, 127, 255, 0.4);
-  }
-
-  .platform-icon.fewya:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(91, 127, 255, 0.6);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .platform-icon {
-      transition: none;
-    }
-    .platform-icon:hover {
-      transform: none;
-    }
-  }
-
   .hero-shipping {
     display: inline-flex;
     align-items: center;
@@ -251,15 +188,6 @@ const {
     color: #b8c7ff;
     font-weight: 700;
   }
-  
-  .platform-icon img,
-  .platform-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
-  
 
   @media (min-width: 768px) {
     .hero-content {
@@ -268,15 +196,6 @@ const {
     
     .hero-badge {
       margin-bottom: var(--space-2xl);
-    }
-    
-    .hero-platforms {
-      gap: var(--space-lg);
-    }
-    
-    .platform-icon {
-      width: 44px;
-      height: 44px;
     }
   }
 </style>
