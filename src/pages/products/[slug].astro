@@ -2,13 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import BuyCta from '../../components/BuyCta.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { AVAILABILITY, getProductoBySlug, getProductos, getRelacionados, getImageUrl, isBuyable, schemaAvailability, type Producto } from '../../lib/catalog';
+import { AVAILABILITY, getProductoBySlug, getProductos, getRelacionados, getImageUrl, isBuyable, isIndexable, schemaAvailability, type Producto } from '../../lib/catalog';
 
 export async function getStaticPaths() {
   const productos = await getProductos();
 
   // Every product gets a page, whatever its availability: a URL that has been
-  // indexed keeps returning 200 even when the product is gone.
+  // indexed keeps returning 200 even when the product is gone. Retired ones are
+  // built too — they are hidden from the catalog and noindex'd, not deleted, so
+  // that no inbound link breaks and the URLs can be revived later.
   return productos.map((producto) => ({
     params: { slug: producto.slug },
     props: { producto },
@@ -68,6 +70,7 @@ const metaDescription = producto.descripcion
   type="product"
   image={mainImage}
   heroImage={mainImage}
+  noindex={!isIndexable(producto.availability)}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 

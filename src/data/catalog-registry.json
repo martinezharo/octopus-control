@@ -8,10 +8,12 @@
     "  qué productos se han quedado sin pareja.",
     "",
     "retired: productos que ya no se venden. Su URL SIGUE VIVA y devuelve 200 con",
-    "  la ficha marcada como descatalogada y enlaces a alternativas. No borres",
-    "  entradas de aquí: si algún día vuelves a subir el modelo a Fewya, quita la",
-    "  entrada de `retired` y el emparejamiento automático lo reactivará sobre la",
-    "  MISMA URL, conservando su historial en Google."
+    "  la ficha marcada como descatalogada y enlaces a alternativas, pero NO se",
+    "  muestra en el catálogo y lleva `noindex`: estas fichas perdieron su",
+    "  contenido en la migración de abril de 2026 y sólo conservan título y marca.",
+    "  Ver docs/catalog-sync.md. No borres entradas de aquí: si algún día vuelves a",
+    "  subir el modelo a Fewya, quita la entrada de `retired` y el emparejamiento",
+    "  automático lo reactivará sobre la MISMA URL, conservando su historial."
   ],
   "shop": "octopus-control",
   "overrides": {},

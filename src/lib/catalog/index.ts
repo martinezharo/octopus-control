@@ -3,9 +3,9 @@ import snapshotData from '../../data/productos.json';
 import registryData from '../../data/catalog-registry.json';
 import { fetchFewyaCatalog, loadCachedCatalog } from './feed';
 import { reconcileCatalog, sortForDisplay, type SyncReport } from './reconcile';
-import { AVAILABILITY, isBuyable, isSynced, schemaAvailability, type Availability, type CatalogRegistry, type Producto, type SnapshotProducto } from './types';
+import { AVAILABILITY, isBrowsable, isBuyable, isIndexable, isSynced, schemaAvailability, type Availability, type CatalogRegistry, type Producto, type SnapshotProducto } from './types';
 
-export { AVAILABILITY, isBuyable, isSynced, schemaAvailability };
+export { AVAILABILITY, isBrowsable, isBuyable, isIndexable, isSynced, schemaAvailability };
 export type { Availability, Producto };
 
 const snapshot = snapshotData as SnapshotProducto[];
@@ -56,9 +56,18 @@ function catalog() {
     return catalogPromise;
 }
 
-/** Every product with a page on this site, whatever its availability. */
+/**
+ * Every product with a page on this site, whatever its availability.
+ * Use this only to enumerate URLs (static paths); for anything a visitor sees,
+ * use `getProductosVisibles`.
+ */
 export async function getProductos(): Promise<Producto[]> {
     return (await catalog()).productos;
+}
+
+/** Products shown to visitors browsing the site. Excludes retired ones. */
+export async function getProductosVisibles(): Promise<Producto[]> {
+    return (await getProductos()).filter(p => isBrowsable(p.availability));
 }
 
 /** Only products that can be bought right now. */
@@ -81,9 +90,15 @@ export async function getProductosDestacados(limit = 6): Promise<Producto[]> {
     return [...destacados, ...resto].slice(0, limit);
 }
 
-/** Categories that have at least one buyable product, plus the current one. */
+/**
+ * Categories with at least one product a visitor can actually reach.
+ *
+ * Built from the visible products only: Sony, CHiQ, JVC and Panasonic exist in
+ * this catalog exclusively as retired models, so including them would offer
+ * filters that always come back empty.
+ */
 export async function getCategorias(): Promise<string[]> {
-    const productos = await getProductos();
+    const productos = await getProductosVisibles();
     const categorias = new Set<string>();
     for (const p of productos) {
         if (p.categoria) categorias.add(p.categoria);

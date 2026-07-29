@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { AVAILABILITY, getProductos, type Availability } from '../lib/catalog';
+import { AVAILABILITY, getProductos, isIndexable, type Availability } from '../lib/catalog';
 
 const pages = [
     '',
@@ -17,9 +17,11 @@ const pages = [
 const site = 'https://octopuscontrol.com';
 
 /**
- * Retired products stay in the sitemap: their URLs are live, indexable and still
- * useful for identifying a model. They are simply ranked below the ones that can
- * be bought, and crawled less often since they no longer change.
+ * Out-of-stock and unlisted products stay in the sitemap: their pages carry the
+ * real title, description, images and price, so they remain worth indexing.
+ *
+ * Retired products do not. They are `noindex` (see `isIndexable`), and listing a
+ * noindex URL in the sitemap sends Search Console two contradictory signals.
  */
 const PRODUCT_PRIORITY: Record<Availability, { priority: string; changefreq: string }> = {
     [AVAILABILITY.IN_STOCK]: { priority: '0.9', changefreq: 'weekly' },
@@ -29,7 +31,7 @@ const PRODUCT_PRIORITY: Record<Availability, { priority: string; changefreq: str
 };
 
 export const GET: APIRoute = async () => {
-    const productos = await getProductos();
+    const productos = (await getProductos()).filter(p => isIndexable(p.availability));
 
     const urls = [
         ...pages.map((page) => ({
