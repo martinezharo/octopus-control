@@ -1,4 +1,5 @@
 import type { FewyaCatalog } from './types';
+import { validateCatalogFeed } from './validation.mjs';
 
 /**
  * Fetches the Fewya public catalog feed at build time.
@@ -15,14 +16,13 @@ export function feedUrl(baseUrl: string, shopSlug: string): string {
     return `${baseUrl.replace(/\/+$/, '')}/api/public/shops/${encodeURIComponent(shopSlug)}/catalog.json`;
 }
 
+/**
+ * Shared with `scripts/sync-catalog.mjs`, which must refuse to cache exactly
+ * what the build refuses to read. The two drifting apart is how a deploy ends
+ * up running against a cache the build would have thrown away.
+ */
 function isUsable(payload: unknown): payload is FewyaCatalog {
-    const catalog = payload as FewyaCatalog | null;
-    if (!catalog || typeof catalog !== 'object') return false;
-    if (!Array.isArray(catalog.products)) return false;
-    if (!catalog.shop?.slug) return false;
-    // An empty catalog is treated as a failed sync rather than "everything was
-    // withdrawn": a bad deploy on the Fewya side must not unlist this whole site.
-    return catalog.products.length > 0;
+    return validateCatalogFeed(payload).ok;
 }
 
 export async function fetchFewyaCatalog(baseUrl: string, shopSlug: string): Promise<FewyaCatalog | null> {

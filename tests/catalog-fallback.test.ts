@@ -105,7 +105,7 @@ describe('when the live feed is unreachable', () => {
         await getProductos();
 
         const warnings = (console.warn as ReturnType<typeof vi.spyOn>).mock.calls.map(String);
-        expect(warnings.some((w) => w.includes('cache'))).toBe(true);
+        expect(warnings.some((w: string) => w.includes('cache'))).toBe(true);
     });
 });
 

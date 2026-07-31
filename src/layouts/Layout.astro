@@ -38,8 +38,11 @@ const fullTitle =
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDMB8XSQFF"
     ></script>
     <script is:inline>
+      // @ts-expect-error - gtag's own snippet, kept verbatim; `dataLayer` is
+      // created here rather than declared anywhere TypeScript can see.
       window.dataLayer = window.dataLayer || [];
       function gtag() {
+        // @ts-expect-error - see above.
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
