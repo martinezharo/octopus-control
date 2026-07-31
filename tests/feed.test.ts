@@ -82,7 +82,7 @@ describe('fetchFewyaCatalog — the happy path', () => {
 
         await fetchFewyaCatalog(BASE, SHOP);
 
-        const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+        const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
         expect(url).toBe(feedUrl(BASE, SHOP));
         expect((init.headers as Record<string, string>).Accept).toBe('application/json');
         expect(init.signal).toBeInstanceOf(AbortSignal);

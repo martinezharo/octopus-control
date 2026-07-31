@@ -20,6 +20,7 @@
 import { writeFile, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { validateCatalogFeed, isSameCatalog } from '../src/lib/catalog/validation.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUTPUT = join(ROOT, 'src/data/fewya-catalog.json');
@@ -30,6 +31,10 @@ const CHECK_ONLY = process.argv.includes('--check');
 
 const url = `${BASE_URL}/api/public/shops/${encodeURIComponent(SHOP_SLUG)}/catalog.json`;
 
+/**
+ * @param {string} message
+ * @returns {never}
+ */
 function fail(message) {
     console.error(`✗ ${message}`);
     process.exit(1);
@@ -38,30 +43,21 @@ function fail(message) {
 const response = await fetch(url, {
     headers: { Accept: 'application/json' },
     signal: AbortSignal.timeout(20_000),
-}).catch(error => fail(`Could not reach ${url}: ${error.message}`));
+}).catch(/** @param {Error} error */ error => fail(`Could not reach ${url}: ${error.message}`));
 
 if (!response.ok) fail(`${url} responded ${response.status}`);
 
 const catalog = await response.json().catch(() => fail(`${url} did not return JSON`));
 
-if (!Array.isArray(catalog?.products)) fail('The feed has no "products" array');
-if (catalog.products.length === 0) {
-    // Overwriting a good cache with an empty one would unlist the whole site on
-    // the next build that cannot reach the network.
-    fail('The feed returned zero products; refusing to overwrite the cache');
-}
-if (catalog.shop?.slug !== SHOP_SLUG) {
-    fail(`The feed is for shop "${catalog.shop?.slug}", expected "${SHOP_SLUG}"`);
-}
+// The same verdict the build uses, so the cache this script is willing to
+// write is exactly the one the build is willing to read.
+const verdict = validateCatalogFeed(catalog, SHOP_SLUG);
+if (!verdict.ok) fail(`${verdict.reason}; refusing to overwrite the cache`);
 
-// `generated_at` changes on every request; ignore it when comparing so an
-// unchanged catalog produces no diff.
-const stripVolatile = ({ generated_at: _ignored, ...rest }) => rest;
 const serialized = `${JSON.stringify(catalog, null, 2)}\n`;
 
 const previous = await readFile(OUTPUT, 'utf8').catch(() => null);
-const unchanged = previous
-    && JSON.stringify(stripVolatile(JSON.parse(previous))) === JSON.stringify(stripVolatile(catalog));
+const unchanged = previous !== null && isSameCatalog(JSON.parse(previous), catalog);
 
 if (unchanged) {
     console.log(`✓ Cache already up to date (${catalog.products.length} products)`);
@@ -74,6 +70,6 @@ if (CHECK_ONLY) {
 
 await writeFile(OUTPUT, serialized);
 
-const inStock = catalog.products.filter(p => p.in_stock).length;
+const inStock = catalog.products.filter(/** @param {{ in_stock?: boolean }} p */ p => p.in_stock).length;
 console.log(`✓ Cached ${catalog.products.length} products from ${catalog.shop.name} (${inStock} in stock)`);
 console.log('  Run `pnpm build` to see how they match this site\'s URLs.');

@@ -1,0 +1,12 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    // `src/lib/catalog/validation.mjs` is plain JavaScript on purpose: the sync
+    // script runs under bare `node` and imports it with no build step. Checking
+    // it from its JSDoc types keeps it honest anyway.
+    "allowJs": true,
+    "checkJs": true
+  }
+}

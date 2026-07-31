@@ -785,8 +785,8 @@ const { categorias, unavailableCount = 0 } = Astro.props;
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    let categoryPills = document.querySelectorAll('#category-pills .pill');
-    const sortButtons = document.querySelectorAll('#sort-options .sort-btn');
+    let categoryPills = document.querySelectorAll<HTMLElement>('#category-pills .pill');
+    const sortButtons = document.querySelectorAll<HTMLElement>('#sort-options .sort-btn');
     const resetBtn = document.getElementById('reset-filters');
     const toggleBtn = document.getElementById('toggle-filters');
     const filterHeader = document.getElementById('filter-header');
@@ -833,13 +833,13 @@ const { categorias, unavailableCount = 0 } = Astro.props;
     
     // Get all product cards
     const getAllProducts = () => {
-      return Array.from(productGrid.querySelectorAll('.product-card-wrapper'));
+      return Array.from(productGrid.querySelectorAll<HTMLElement>('.product-card-wrapper'));
     };
     
     // Update category counts and reorder pills by count
     const updateCategoryCounts = () => {
       const products = getAllProducts();
-      const counts = { all: products.length };
+      const counts: Record<string, number> = { all: products.length };
       
       products.forEach(product => {
         const category = product.dataset.category || '';
@@ -849,22 +849,22 @@ const { categorias, unavailableCount = 0 } = Astro.props;
       });
       
       // Update count badges
-      document.querySelectorAll('.pill-count').forEach(badge => {
-        const category = badge.dataset.count;
+      document.querySelectorAll<HTMLElement>('.pill-count').forEach(badge => {
+        const category = badge.dataset.count ?? '';
         const count = counts[category] || 0;
         badge.textContent = count > 0 ? count.toString() : '';
       });
       
       // Sort pills by count (except "Todos" which stays first)
       if (categoryPillsContainer) {
-        const pills = Array.from(categoryPillsContainer.querySelectorAll('.pill'));
+        const pills = Array.from(categoryPillsContainer.querySelectorAll<HTMLElement>('.pill'));
         const todosPill = pills.find(p => p.dataset.category === 'all');
         const otherPills = pills.filter(p => p.dataset.category !== 'all');
         
         // Sort by count descending
         otherPills.sort((a, b) => {
-          const countA = counts[a.dataset.category] || 0;
-          const countB = counts[b.dataset.category] || 0;
+          const countA = counts[a.dataset.category ?? ''] || 0;
+          const countB = counts[b.dataset.category ?? ''] || 0;
           return countB - countA;
         });
         
@@ -877,7 +877,7 @@ const { categorias, unavailableCount = 0 } = Astro.props;
         });
         
         // Refresh pill references
-        categoryPills = document.querySelectorAll('#category-pills .pill');
+        categoryPills = document.querySelectorAll<HTMLElement>('#category-pills .pill');
         
         // Re-attach click handlers
         categoryPills.forEach(pill => {
