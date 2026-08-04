@@ -4,21 +4,26 @@
     "version": "0.0.1",
     "scripts": {
         "dev": "astro dev",
-        "build": "astro check && astro build",
+        "build": "astro check && pnpm lint && astro build && pnpm test:build-smoke",
         "preview": "astro preview",
         "astro": "astro",
         "deploy": "pnpm build && wrangler pages deploy dist --project-name octopus-control-astro",
         "test": "vitest run",
+        "test:build-smoke": "vitest run --config vitest.build.config.ts",
         "test:watch": "vitest",
         "sync:catalog": "node scripts/sync-catalog.mjs",
-        "check": "astro check"
+        "check": "astro check",
+        "lint": "eslint ."
     },
     "dependencies": {
         "astro": "^5.17.1"
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.10",
+        "eslint": "^10.8.0",
+        "eslint-plugin-astro": "^1.7.0",
         "typescript": "^5.9.3",
+        "typescript-eslint": "^8.65.0",
         "vitest": "^4.1.5",
         "wrangler": "^4.67.0"
     }

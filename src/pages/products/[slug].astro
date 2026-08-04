@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import BuyCta from '../../components/BuyCta.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { AVAILABILITY, getProductoBySlug, getProductos, getRelacionados, getImageUrl, isBuyable, isIndexable, schemaAvailability, type Producto } from '../../lib/catalog';
+import { AVAILABILITY, getProductos, getRelacionados, getImageUrl, isBuyable, isIndexable, schemaAvailability, type Producto } from '../../lib/catalog';
 
 export async function getStaticPaths() {
   const productos = await getProductos();
@@ -72,7 +72,7 @@ const metaDescription = producto.descripcion
   heroImage={mainImage}
   noindex={!isIndexable(producto.availability)}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <article class="product-page">
     <div class="product-bg"></div>

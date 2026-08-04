@@ -35,7 +35,7 @@ const fullTitle =
 <html lang="es">
   <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDMB8XSQFF"
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NDMB8XSQFF"
     ></script>
     <script is:inline>
       // @ts-expect-error - gtag's own snippet, kept verbatim; `dataLayer` is
@@ -43,6 +43,7 @@ const fullTitle =
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         // @ts-expect-error - see above.
+        // eslint-disable-next-line prefer-rest-params -- Google's snippet intentionally pushes its Arguments object.
         dataLayer.push(arguments);
       }
       gtag("js", new Date());

@@ -8,7 +8,6 @@ import snapshot from '../src/data/productos.json';
  * ranked URL silently loses its content.
  */
 
-type Local = { slug: string; title: string };
 type Remote = { slug: string; title: string };
 
 /** How Fewya slugifies: from the title, always `mando-<marca>-<modelo>`. */

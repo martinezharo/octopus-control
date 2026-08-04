@@ -79,6 +79,7 @@ export function isSameCatalog(a, b) {
  */
 function stripVolatile(catalog) {
     if (!catalog || typeof catalog !== 'object') return catalog;
-    const { generated_at: _ignored, ...rest } = /** @type {Record<string, unknown>} */ (catalog);
+    const rest = { .../** @type {Record<string, unknown>} */ (catalog) };
+    delete rest.generated_at;
     return rest;
 }
