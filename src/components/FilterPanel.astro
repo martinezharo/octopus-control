@@ -12,18 +12,18 @@ const { categorias, unavailableCount = 0 } = Astro.props;
   <!-- Header con título y controles -->
   <div class="filter-header is-collapsed" id="filter-header">
     <div class="header-left">
-      <h3 class="filter-title">
-        <div class="filter-title-icon">
+      <h2 class="filter-title">
+        <span class="filter-title-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
           </svg>
-        </div>
+        </span>
         Filtros
-      </h3>
+      </h2>
     </div>
     
     <div class="header-actions">
-      <button class="reset-btn" id="reset-filters">
+      <button class="reset-btn" id="reset-filters" aria-label="Restablecer filtros">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
           <path d="M3 3v5h5"/>
@@ -45,12 +45,12 @@ const { categorias, unavailableCount = 0 } = Astro.props;
       <!-- Categorías con scroll horizontal -->
       <div class="filter-section category-section">
         <div class="section-header">
-          <h4 class="filter-label">
+          <h3 class="filter-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 4h4v4H4zM14 4h4v4h-4zM4 14h4v4H4zM14 14h4v4h-4z"/>
             </svg>
             Categoría
-          </h4>
+          </h3>
           <div class="scroll-indicator" id="scroll-indicator">
             <span class="scroll-hint">Desliza</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -88,12 +88,12 @@ const { categorias, unavailableCount = 0 } = Astro.props;
       
       <!-- Ordenar por -->
       <div class="filter-section sort-section">
-        <h4 class="filter-label">
+        <h3 class="filter-label">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 6h18M6 12h12M9 18h6"/>
           </svg>
           Ordenar por
-        </h4>
+        </h3>
         <div class="sort-options" id="sort-options">
           <button class="sort-btn active" data-sort="default">
             <div class="sort-btn-icon">
@@ -124,12 +124,12 @@ const { categorias, unavailableCount = 0 } = Astro.props;
 
       {unavailableCount > 0 && (
         <div class="filter-section availability-section">
-          <h4 class="filter-label">
+          <h3 class="filter-label">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M20 7h-9M14 17H5M17 14l3 3-3 3M7 10L4 7l3-3"/>
             </svg>
             Disponibilidad
-          </h4>
+          </h3>
           <label class="availability-toggle">
             <input type="checkbox" id="only-available" />
             <span class="switch" aria-hidden="true"></span>
@@ -942,9 +942,6 @@ const { categorias, unavailableCount = 0 } = Astro.props;
     const updateProducts = () => {
       const products = getAllProducts();
       
-      // Add stagger animation on filter change
-      let visibleIndex = 0;
-      
       products.forEach(product => {
         const category = product.dataset.category || '';
         const matchesCategory = currentCategory === 'all' || category === currentCategory;
@@ -952,8 +949,6 @@ const { categorias, unavailableCount = 0 } = Astro.props;
 
         if (matchesCategory && matchesAvailability) {
           product.style.display = '';
-          product.style.animationDelay = `${visibleIndex * 0.05}s`;
-          visibleIndex++;
         } else {
           product.style.display = 'none';
         }

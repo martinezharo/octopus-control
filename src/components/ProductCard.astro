@@ -24,17 +24,17 @@ const unavailableLabel = buyable
   : UNAVAILABLE_LABEL[producto.availability as keyof typeof UNAVAILABLE_LABEL];
 ---
 
-<article
-  class:list={['product-card', { 'is-unavailable': !buyable }]}
-  style={`animation-delay: ${index * 100}ms`}
->
+<article class:list={['product-card', { 'is-unavailable': !buyable }]}>
   <a href={`/products/${producto.slug}/`} class="product-link">
     <div class="product-image">
       <img
         src={imageUrl}
         alt={producto.titulo}
-        loading="lazy"
+        width="400"
+        height="400"
+        loading={index < 3 ? 'eager' : 'lazy'}
         decoding="async"
+        fetchpriority={index < 3 ? 'high' : 'auto'}
       />
       {producto.destacado && buyable && (
         <span class="badge badge-featured">
@@ -70,8 +70,6 @@ const unavailableLabel = buyable
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: all var(--transition-base);
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
   }
   
   .product-card:hover {
@@ -148,7 +146,7 @@ const unavailableLabel = buyable
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--color-gray-400);
+    color: var(--color-gray-500);
   }
   
   .product-overlay {
