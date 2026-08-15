@@ -2,7 +2,6 @@
 import { AVAILABILITY, formatPrice, type Availability } from '../lib/catalog';
 
 interface Props {
-  titulo: string;
   precio: number | null;
   availability: Availability;
   fewyaUrl: string;
@@ -10,7 +9,7 @@ interface Props {
   alternativesHref?: string;
 }
 
-const { titulo, precio, availability, fewyaUrl, alternativesHref = '#alternativas' } = Astro.props;
+const { precio, availability, fewyaUrl, alternativesHref = '#alternativas' } = Astro.props;
 
 const isBuyable = availability === AVAILABILITY.IN_STOCK;
 const isArchived = availability === AVAILABILITY.ARCHIVED;
@@ -52,7 +51,6 @@ const status = STATUS[availability];
       target="_blank"
       rel="noopener"
       class="cta cta-primary"
-      aria-label={`Comprar ${titulo} en Fewya`}
     >
       <img src="/fewya.svg" alt="" width="22" height="22" aria-hidden="true" />
       <span>Comprar en Fewya</span>

@@ -169,7 +169,6 @@ const metaDescription = producto.descripcion
           <h1 class="product-title">{producto.titulo}</h1>
 
           <BuyCta
-            titulo={producto.titulo}
             precio={producto.precio}
             availability={producto.availability}
             fewyaUrl={producto.fewyaUrl}
@@ -382,21 +381,37 @@ const metaDescription = producto.descripcion
   }
   
   .gallery-dot {
-    width: 8px;
-    height: 8px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.5);
+    background: transparent;
     border: none;
     cursor: pointer;
     transition: all var(--transition-base);
     padding: 0;
   }
+
+  .gallery-dot::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.5);
+    transition: background var(--transition-base), transform var(--transition-base);
+  }
   
-  .gallery-dot:hover {
+  .gallery-dot:hover::before {
     background: rgba(255, 255, 255, 0.8);
   }
   
   .gallery-dot.active {
+    transform: none;
+  }
+
+  .gallery-dot.active::before {
     background: var(--color-white);
     transform: scale(1.2);
   }
