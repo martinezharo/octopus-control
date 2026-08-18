@@ -68,13 +68,57 @@ const unavailableLabel = buyable
     background: var(--color-white);
     border-radius: var(--radius-xl);
     overflow: hidden;
+    /* Resting and hover shadows are both --shadow-* pairs, so the lists have a
+       matching length and interpolate cleanly. Keep it that way: adding a shadow
+       to only one of the two states makes the browser pad the shorter list with
+       a zero-size shadow and animate blur instead of opacity. */
     box-shadow: var(--shadow-md);
-    transition: all var(--transition-base);
+    /* Explicit properties rather than `all`: `all` also transitioned opacity,
+       which competed with the reveal animation below. */
+    transition:
+      transform var(--transition-base),
+      box-shadow var(--transition-base);
   }
-  
+
+  /* The entrance animation is opt-in from JS and only ever applied to cards that
+     start below the fold. Cards render at their final state by default, so no
+     card is ever hidden by CSS alone — a JS failure, a reduced-motion
+     preference, or a card that is already visible all leave the grid painted
+     immediately, which keeps LCP off the animation's critical path. */
+  .product-card.is-reveal-pending {
+    opacity: 0;
+  }
+
+  /* No fill-mode: once the animation ends the card falls back to its natural
+     state, so the :hover lift keeps working instead of being pinned by the
+     animation's final frame. */
+  .product-card.is-revealing {
+    animation: card-reveal 0.45s ease-out;
+  }
+
+  @keyframes card-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-card.is-reveal-pending,
+    .product-card.is-revealing {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
   .product-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    box-shadow: var(--shadow-xl);
   }
   
   .product-link {
@@ -216,3 +260,71 @@ const unavailableLabel = buyable
     color: var(--color-primary);
   }
 </style>
+
+<script>
+  // Astro hoists and dedupes this script, so it runs once per page no matter how
+  // many cards the grid renders.
+  const REVEAL_DURATION_MS = 450;
+  const STAGGER_STEP_MS = 60;
+  const STAGGER_MAX_STEPS = 3;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const setupReveal = () => {
+    if (prefersReducedMotion.matches || !('IntersectionObserver' in window)) return;
+
+    const cards = document.querySelectorAll<HTMLElement>('.product-card');
+    if (cards.length === 0) return;
+
+    // Only cards that start below the fold are hidden. Anything already on
+    // screen — including the LCP candidate — is left untouched, so the animation
+    // can never delay first paint of visible content.
+    const viewportHeight = window.innerHeight;
+    const pending = Array.from(cards).filter(
+      (card) => card.getBoundingClientRect().top >= viewportHeight,
+    );
+    if (pending.length === 0) return;
+
+    for (const card of pending) card.classList.add('is-reveal-pending');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Stagger only within the batch crossing the threshold together, capped
+        // so a long scroll jump never leaves the last card waiting on a queue.
+        let step = 0;
+
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+
+          const card = entry.target as HTMLElement;
+          observer.unobserve(card);
+
+          card.style.animationDelay = `${Math.min(step, STAGGER_MAX_STEPS) * STAGGER_STEP_MS}ms`;
+          step += 1;
+
+          card.classList.remove('is-reveal-pending');
+          card.classList.add('is-revealing');
+
+          // Drop the animation class so the hover transform is not competing
+          // with a finished animation on the same property.
+          window.setTimeout(() => {
+            card.classList.remove('is-revealing');
+            card.style.animationDelay = '';
+          }, REVEAL_DURATION_MS + STAGGER_MAX_STEPS * STAGGER_STEP_MS);
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px' },
+    );
+
+    for (const card of pending) observer.observe(card);
+
+    // If the preference flips mid-session, stop hiding anything still queued.
+    prefersReducedMotion.addEventListener('change', (event) => {
+      if (!event.matches) return;
+      observer.disconnect();
+      for (const card of pending) card.classList.remove('is-reveal-pending', 'is-revealing');
+    });
+  };
+
+  setupReveal();
+</script>
